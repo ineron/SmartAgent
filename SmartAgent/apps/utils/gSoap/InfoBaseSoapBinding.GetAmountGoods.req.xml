@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+ xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns2="http://v8.1c.ru/8.1/data/core"
+ xmlns:ns1="http://80.249.178.90:8025/FIT-SPB/">
+ <SOAP-ENV:Body>
+   <ns1:GetAmountGoods>
+    <ns1:Period>2015-01-22T13:29:19Z</ns1:Period>
+    <ns1:Options>
+     <ns2:Property>
+      <ns2:Value>      </ns2:Value>
+     </ns2:Property>
+    </ns1:Options>
+    <ns1:Selections>
+     <ns2:Property>
+      <ns2:Value>      </ns2:Value>
+     </ns2:Property>
+    </ns1:Selections>
+   </ns1:GetAmountGoods>
+
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

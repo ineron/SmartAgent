@@ -1,0 +1,222 @@
+<% c++ #include "data/tmpl_messages.h" %>
+<% skin defskin %>
+<% view Read uses Data::Messages::Read  %>
+<% template header() %>
+
+<h2 class="email-open-header">
+	<%= currentMessage.subject%> <span class="label txt-color-white">inbox</span>
+	<a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Print" class="txt-color-darken pull-right"><i class="fa fa-print"></i></a>	
+</h2>
+
+<div class="inbox-info-bar">
+	<div class="row">
+		<div class="col-sm-9">
+			<img src="media/img/avatars/5.png" alt="me" class="away">
+			<strong><%= currentMessage.senderName %></strong>
+			<span class="hidden-mobile"><%= currentMessage.senderEmail %>;пришло  <strong> комне </strong> в <i><%= currentMessage.messageDate%></i></span> 
+		</div>
+		<div class="col-sm-3 text-right">
+			<%if (0)%>
+			<div class="btn-group text-left">
+				<button class="btn btn-primary btn-sm replythis">
+					<i class="fa fa-reply"></i> Ответить
+				</button>
+				<button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-angle-down"></i>
+				</button>
+				<ul class="dropdown-menu pull-right">
+					<li>
+						<a href="javascript:void(0);" class="replythis"><i class="fa fa-reply"></i> Ответить</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="replythis"><i class="fa fa-mail-forward"></i> Переслать</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);"><i class="fa fa-print"></i> Печать</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:void(0);"><i class="fa fa-ban"></i> Пометить как спам</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);"><i class="fa fa-trash-o"></i> Удалить</a>
+					</li>
+				</ul>
+			</div>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
+<div class="inbox-message">
+	<%= currentMessage.message %>
+</div>
+
+<div class="inbox-download">
+
+	<% foreach item in currentMessage.attachments %>
+
+	Вложений <%= currentMessage.attachments.size() %>  — <a href="javascript:void(0);"> Загрузить все вложения </a> 
+	
+	<ul class="inbox-download-list">
+	<% item %>
+		<li>
+			<div class="well well-sm">
+				<span>
+					<% if (item.isImage) %>
+					<img src=<%= item.file %>>
+					<% else %>
+					<i class="fa fa-file-excel-o"></i>
+					<% end %>
+				</span>
+				<br>
+				<strong>"<%= item.originalName %>"</strong> 
+				<br>
+				<%= item.size %> байт.
+				<br> 
+				<a class="filedownload_" href="messages/read/attachment?uid=<%= item.file%>"> Загрузить</a>  
+				<!--<a href="media/msg/spb/М0026076/_07_М0026076_20141217_36443.xls">Download</a>-->
+			</div>
+		</li>
+	<% end %>
+	</ul>
+	<% end %>
+</div>
+
+<% if (0) %>
+<div class="email-infobox">
+
+	<div class="well well-sm well-light">
+		<h5>Related Invoice</h5>
+		<ul class="list-unstyled">
+			<li>
+				<i class="fa fa-file fa-fw text-success"></i><a href="javascript:void(0);"> #4831 - Paid</a>
+			</li>
+			<li>
+				<i class="fa fa-file fa-fw text-danger"></i><a href="javascript:void(0);"><strong> #4835 - Unpaid</strong></a>
+			</li>
+		</ul>
+
+
+	</div>
+
+	<div class="well well-sm well-light">
+		<h5>Upcoming Meetings</h5>
+		
+		<p>
+			<span class="label label-success"><i class="fa fa-check"></i> <strike>Agenda Review @ 10 AM</strike> </span>
+		</p>
+
+		<p>
+			<span class="label label-primary"><i class="fa fa-clock-o"></i> Client Meeting @ 2:30 PM</span>
+		</p>
+
+		<p>
+			<span class="label label-warning"><i class="fa fa-clock-o"></i> Salary Review @ 4:00 PM</span>
+		</p>		
+	</div>	
+
+	<ul class="list-inline">
+		<li><img src="media/img/avatars/5.png" alt="me" width="30px"></li>
+		<li><img src="media/img/avatars/3.png" alt="me" width="30px"></li>
+		<li><img src="media/img/avatars/sunny.png" alt="me" width="30px"></li>
+		<li><a href="javascript:void(0);">1 more</a></li>
+	</ul>
+
+</div>
+<% end %>
+
+
+<script type="text/javascript">
+	
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+	
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){ 
+	 *  loadScript(".../plugin.js", run_after_loaded);	
+	 * }
+	 * 
+	 * OR
+	 * 
+	 * loadScript(".../plugin.js", run_after_loaded);
+	 */
+	
+	
+	// PAGE RELATED SCRIPTS
+	
+	
+	<% if not currentMessage.isUnread %>
+	NewMessageCount(1);
+	SetCheckedState(false);
+	<% end %>
+	
+	$(".table-wrap [rel=tooltip]").tooltip();
+
+	$(".replythis").click(function(){
+		loadURL("messages/reply", $('#inbox-content > .table-wrap'));
+	})
+	
+	loadScript("media/js/plugin/jquery-file-download/jquery.fileDownload.js");
+	
+	$(".filedownload").click(function(){
+	    <!-- item.file-->
+	    console.log("file download ",this);
+	    $.fileDownload($(this).attr('href'), {
+        	preparingMessageHtml: "We are preparing your report, please wait...",
+        	failMessageHtml: "There was a problem generating your report, please try again."
+    	    });
+    	    return false; //this is critical to stop the click event which will trigger a normal file download!
+	});
+	
+	SetCheckedState(true);
+	
+	
+</script>
+
+<% end template %>
+
+<% template render() %>
+    <% include header() %>
+<% end template %>
+<% end view %>
+<% end skin %>

@@ -1,0 +1,308 @@
+<% c++ #include "data/tmpl_service.h" %>
+<% skin defskin %>
+<% view Service uses Data::Service %>
+<% template header() %>
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<i class="fa fa-cloud-upload fa-fw "></i> 
+				Сервис
+			<span>> 
+				Импорт
+			</span>
+		</h1>
+	</div>
+	<% if (content.user_level == 2) %>
+	<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+		<ul id="sparks" class="">
+			<li class="sparks-info">
+				<h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+				<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+					1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+				</div>
+			</li>
+			<li class="sparks-info">
+				<h5> Клиенты <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+			<li class="sparks-info">
+				<h5> Продажи <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+		</ul>
+	</div>
+	<% end %>
+</div>
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+	<!-- row -->
+	<div class="row">
+
+		<!-- NEW WIDGET START -->
+		<article class="col-sm-6">
+
+			<p class="alert alert-info">
+				<i class="fa fa-info fa-fw fa-lg"></i><strong>Opps!</strong> 
+				Для того чтобы загрузить данные с помощью файла xls,xlsx или csv Вам необходимо перетощить его из открытого проводника или нажать в любом местк для вызова диалога открытия фала..
+			</p>
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-cloud-upload"></i> </span>
+					<h2>Импорт файла ! </h2>
+
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body">
+
+						<form action="upload" class="dropzone" id="mydropzone">
+<div class="fallback">
+    <input name="file" type="file" multiple />
+ </div>
+						</form>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+
+
+		<!-- NEW WIDGET START -->
+		<article class="col-sm-6">
+
+			<p class="alert alert-info">
+				<i class="fa fa-info fa-fw fa-lg"></i><strong>Opps!</strong> 
+				Чтобы загрузить данные, Вам нужно скопировать выделенную область в открытом файле Excel и вставить в это окно. 1 колонка должна быть кодом 2 количество необходимого товара
+			</p>
+			
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-cloud-upload"></i> </span>
+					<h2>Импорт текстовых данных! </h2>
+
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body">
+
+						<div   class="" >
+						    <fieldset>
+							<textarea id="uploadtext" name="text"  class="custom-scroll md-input" style="max-height: 180px; width:100%; resize: none;" rows="14"></textarea>
+						    </fieldset>
+						    <div class="form-actions">
+							<div class="row">
+							    <div class="col-md-12">
+								<button id="sendtext" class="btn btn-default" type="submit">
+								    <i class="fa fa-eye"></i>
+								    Импортировать
+								</button>
+							    </div>
+							</div>
+						    </div>
+						</div>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+
+	</div>
+
+	<!-- end row -->
+
+
+</section>
+<!-- end widget grid -->
+
+<script type="text/javascript">
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+	
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 */
+
+	// PAGE RELATED SCRIPTS
+	
+	// pagefunction
+	
+	var pagefunction = function() {
+		
+		Dropzone.autoDiscover = false;
+		var dz = $("#mydropzone").dropzone({
+			addRemoveLinks : true,
+			maxFilesize: 0.5,
+			/*acceptedFiles:'.xls,.xlsx,.csv,.txt',*/
+			dictInvalidFileType:'Неверный формат файла !',
+			dictDefaultMessage: '<span class="text-center"><span class="font-lg visible-xs-block visible-sm-block visible-lg-block"><span class="font-lg"><i class="fa fa-caret-right text-danger"></i> Перетащите сюда файл <span class="font-xs">для загрузки</span></span><span>&nbsp&nbsp<h4 class="display-inline"> (или кликните мышкой Click)</h4></span>',
+			dictResponseError: 'Error uploading file!',
+			accept: function(file,done) {
+        		    console.log(done);
+        		    if (file.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && file.type != "text/plain" && file.type != "text/csv" && file.type !="application/vnd.ms-excel") 
+        		    {
+            			done("Ошибка! Файлы с таким расширением не поддерживаются");
+        		    }
+        		    else { done(); }
+        		},
+        		success: function(file,response){
+            		    //console.log(file);
+			    $.smallBox({
+				title : "Добавлен новый документ",
+				content : response+'<br/>',
+				color : "#5384AF",
+				timeout: 8000,
+				icon : "fa fa-bell"
+			    });
+			    return file.previewElement.classList.add("dz-success");
+            		},
+    			
+		});
+		
+		
+	    var loadPage = function(){
+		$.ajax({
+		    type:'post',
+            	    data: {
+	        	'text': $("#uploadtext").val(),
+	        	'mode': "text",
+            	    },
+            	    url: "textimport",
+            	    success: function(data){
+            		$("#uploadtext").val('');
+            		console.log(data);
+			$.smallBox({
+			    title : "Добавлен новый документ",
+			    content : data,
+			    color : "#5384AF",
+			    timeout: 8000,
+			    icon : "fa fa-bell"
+			});
+            	    },
+		})
+	    };
+	
+	    $("#sendtext").click(loadPage);
+
+
+
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+	
+	loadScript("media/js/plugin/dropzone/dropzone.min.js", pagefunction);
+
+</script>
+<% end template %>
+
+<% template render() %>
+    <% include header() %>
+<% end template %>
+<% end view %>
+<% end skin %>

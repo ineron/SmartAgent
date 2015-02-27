@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+ xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns2="http://v8.1c.ru/8.1/data/core"
+ xmlns:ns1="http://80.249.178.90:8025/FIT-SPB/">
+ <SOAP-ENV:Body>
+   <ns1:ЦеныНоменклатурыПоГТД>
+    <Период>2015-01-22T13:29:19Z</Период>
+    <Номенклатура>
+     <ns2:valueType>
+      <ns2:Type></ns2:Type>
+      <ns2:Type></ns2:Type>
+      <ns2:TypeSet></ns2:TypeSet>
+      <ns2:TypeSet></ns2:TypeSet>
+      <ns2:TypeId></ns2:TypeId>
+      <ns2:TypeId></ns2:TypeId>
+      <ns2:NumberQualifiers>
+       <ns2:Digits></ns2:Digits>
+       <ns2:FractionDigits></ns2:FractionDigits>
+       <ns2:AllowedSign>Any</ns2:AllowedSign>
+      </ns2:NumberQualifiers>
+      <ns2:StringQualifiers>
+       <ns2:Length></ns2:Length>
+       <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+      </ns2:StringQualifiers>
+      <ns2:DateQualifiers>
+       <ns2:DateFractions>Date</ns2:DateFractions>
+      </ns2:DateQualifiers>
+      <ns2:BinaryDataQualifiers>
+       <ns2:Length></ns2:Length>
+       <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+      </ns2:BinaryDataQualifiers>
+     </ns2:valueType>
+     <ns2:availableValues>
+      <ns2:valueType>
+       <ns2:Type></ns2:Type>
+       <ns2:Type></ns2:Type>
+       <ns2:TypeSet></ns2:TypeSet>
+       <ns2:TypeSet></ns2:TypeSet>
+       <ns2:TypeId></ns2:TypeId>
+       <ns2:TypeId></ns2:TypeId>
+       <ns2:NumberQualifiers>
+        <ns2:Digits></ns2:Digits>
+        <ns2:FractionDigits></ns2:FractionDigits>
+        <ns2:AllowedSign>Any</ns2:AllowedSign>
+       </ns2:NumberQualifiers>
+       <ns2:StringQualifiers>
+        <ns2:Length></ns2:Length>
+        <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+       </ns2:StringQualifiers>
+       <ns2:DateQualifiers>
+        <ns2:DateFractions>Date</ns2:DateFractions>
+       </ns2:DateQualifiers>
+       <ns2:BinaryDataQualifiers>
+        <ns2:Length></ns2:Length>
+        <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+       </ns2:BinaryDataQualifiers>
+      </ns2:valueType>
+      <ns2:availableValues>
+       <ns2:valueType>
+        <ns2:Type></ns2:Type>
+        <ns2:Type></ns2:Type>
+        <ns2:TypeSet></ns2:TypeSet>
+        <ns2:TypeSet></ns2:TypeSet>
+        <ns2:TypeId></ns2:TypeId>
+        <ns2:TypeId></ns2:TypeId>
+        <ns2:NumberQualifiers>
+         <ns2:Digits></ns2:Digits>
+         <ns2:FractionDigits></ns2:FractionDigits>
+         <ns2:AllowedSign>Any</ns2:AllowedSign>
+        </ns2:NumberQualifiers>
+        <ns2:StringQualifiers>
+         <ns2:Length></ns2:Length>
+         <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+        </ns2:StringQualifiers>
+        <ns2:DateQualifiers>
+         <ns2:DateFractions>Date</ns2:DateFractions>
+        </ns2:DateQualifiers>
+        <ns2:BinaryDataQualifiers>
+         <ns2:Length></ns2:Length>
+         <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+        </ns2:BinaryDataQualifiers>
+       </ns2:valueType>
+       <ns2:availableValues>
+        <ns2:valueType>
+         <ns2:Type></ns2:Type>
+         <ns2:Type></ns2:Type>
+         <ns2:TypeSet></ns2:TypeSet>
+         <ns2:TypeSet></ns2:TypeSet>
+         <ns2:TypeId></ns2:TypeId>
+         <ns2:TypeId></ns2:TypeId>
+         <ns2:NumberQualifiers>
+          <ns2:Digits></ns2:Digits>
+          <ns2:FractionDigits></ns2:FractionDigits>
+          <ns2:AllowedSign>Any</ns2:AllowedSign>
+         </ns2:NumberQualifiers>
+         <ns2:StringQualifiers>
+          <ns2:Length></ns2:Length>
+          <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+         </ns2:StringQualifiers>
+         <ns2:DateQualifiers>
+          <ns2:DateFractions>Date</ns2:DateFractions>
+         </ns2:DateQualifiers>
+         <ns2:BinaryDataQualifiers>
+          <ns2:Length></ns2:Length>
+          <ns2:AllowedLength>Fixed</ns2:AllowedLength>
+         </ns2:BinaryDataQualifiers>
+        </ns2:valueType>
+        <ns2:availableValues>
+         <ns2:valueType>
+         </ns2:valueType>
+         <ns2:availableValues>
+          <ns2:valueType>
+          </ns2:valueType>
+         </ns2:availableValues>
+         <ns2:item>
+          <ns2:value>          </ns2:value>
+          <ns2:picture>          </ns2:picture>
+         </ns2:item>
+         <ns2:item>
+          <ns2:value>          </ns2:value>
+          <ns2:picture>          </ns2:picture>
+         </ns2:item>
+         <ns2:lastId>0</ns2:lastId>
+        </ns2:availableValues>
+        <ns2:item>
+         <ns2:value>         </ns2:value>
+         <ns2:presentation></ns2:presentation>
+         <ns2:checkState></ns2:checkState>
+         <ns2:picture>         </ns2:picture>
+         <ns2:id>0</ns2:id>
+        </ns2:item>
+        <ns2:item>
+         <ns2:value>         </ns2:value>
+         <ns2:presentation></ns2:presentation>
+         <ns2:checkState></ns2:checkState>
+         <ns2:picture>         </ns2:picture>
+         <ns2:id>0</ns2:id>
+        </ns2:item>
+        <ns2:lastId>0</ns2:lastId>
+       </ns2:availableValues>
+       <ns2:item>
+        <ns2:value>        </ns2:value>
+        <ns2:presentation></ns2:presentation>
+        <ns2:checkState></ns2:checkState>
+        <ns2:picture>        </ns2:picture>
+        <ns2:id>0</ns2:id>
+       </ns2:item>
+       <ns2:item>
+        <ns2:value>        </ns2:value>
+        <ns2:presentation></ns2:presentation>
+        <ns2:checkState></ns2:checkState>
+        <ns2:picture>        </ns2:picture>
+        <ns2:id>0</ns2:id>
+       </ns2:item>
+       <ns2:lastId>0</ns2:lastId>
+      </ns2:availableValues>
+      <ns2:item>
+       <ns2:value>       </ns2:value>
+       <ns2:presentation></ns2:presentation>
+       <ns2:checkState></ns2:checkState>
+       <ns2:picture>       </ns2:picture>
+       <ns2:id>0</ns2:id>
+      </ns2:item>
+      <ns2:item>
+       <ns2:value>       </ns2:value>
+       <ns2:presentation></ns2:presentation>
+       <ns2:checkState></ns2:checkState>
+       <ns2:picture>       </ns2:picture>
+       <ns2:id>0</ns2:id>
+      </ns2:item>
+      <ns2:lastId>0</ns2:lastId>
+     </ns2:availableValues>
+     <ns2:item>
+      <ns2:value>      </ns2:value>
+      <ns2:presentation></ns2:presentation>
+      <ns2:checkState></ns2:checkState>
+      <ns2:picture>      </ns2:picture>
+      <ns2:id>0</ns2:id>
+     </ns2:item>
+     <ns2:item>
+      <ns2:value>      </ns2:value>
+      <ns2:presentation></ns2:presentation>
+      <ns2:checkState></ns2:checkState>
+      <ns2:picture>      </ns2:picture>
+      <ns2:id>0</ns2:id>
+     </ns2:item>
+     <ns2:lastId>0</ns2:lastId>
+    </Номенклатура>
+   </ns1:ЦеныНоменклатурыПоГТД>
+
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

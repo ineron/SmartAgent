@@ -1,0 +1,15 @@
+<% c++ #include "data/tmpl_nav.h" %>
+<% skin defskin %>
+<% view Nav uses Data::Master extends Master  %>
+<% template nav() %>
+    <% foreach menuItem in page.menuList %>
+    <ul>
+	<% item %>
+        <li><a href="<%= menuItem.url %>"  title="<%= menuItem.title%>" ><i class="<%= menuItem.icon%>"></i><span class="<%= menuItem.style %>"><%= menuItem.title %></span></a></li>
+        <% end %>
+    </ul>
+    <% end %>
+
+<% end template %>
+<% end view %>
+<% end skin %>

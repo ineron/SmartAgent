@@ -1,0 +1,197 @@
+{
+    "reports":{
+	"mutual":{
+    	    "ajax":[
+    		"begindate:$('#from').val()",
+    		"enddate:$('#to').val()",
+    		"user:function(){if($('#contractor').val()){return $('#contractor').val()}else{return $('meta[name=useref]').attr('rel')}}",
+    		"report:'mutual'"],
+    	    "databind":[
+    		"'class':'details-control','orderable':false,data:null,defaultContent:''",
+    		"data:'row_id'",
+    		"data:null",
+    		"data:null",
+    		"data:'row.4.value'",
+    		"data:'row.6.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.7.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.8.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.9.value','sClass':'right','sWidth': '16%'",
+    		],
+    	    "headers":[
+    		"",
+    		"№",
+    		"",
+    		"",
+    		"Документ",
+    		"Сумма нач. остатка.",
+    		"Сумма прихода",
+    		"Сумма расхода",
+    		"Сумма кон. остатка"],
+    	    "render":[
+    		"\"targets\":2,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-print\"></i></a>'}else return '';}",
+    		"\"targets\":3,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-edit\"></i></a>'}else return '';}",
+    		],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":1,
+        },
+        
+
+	"orders-shipping":{
+    	    "ajax":[
+    		"begindate:$('#from').val()",
+    		"enddate:$('#to').val()",
+    		"user:function(){if($('#contractor').val()){return $('#contractor').val()}else{return $('meta[name=useref]').attr('rel')}}",
+    		"report:'orders-shipping'"],
+    	    "databind":[
+    		"data:'row_id','sClass':'right','sWidth': '3%'",
+    		"data:null,'sClass':'right','sWidth': '3%'",
+    		"data:null,'sClass':'right','sWidth': '3%'",
+    		"data:'row.2.value','sClass':'right','sWidth': '10%'",
+    		"data:'row.3.value','sClass':'right','sWidth': '10%'",
+    		"data:'row.4.value','sClass':'right','sWidth': '6%'",
+    		"data:'row.5.value'",
+    		"data:'row.6.value','sClass':'right','sWidth': '10%'",
+    		"data:'row.8.value','sClass':'right','sWidth': '10%'",
+    		"data:'row.9.value','sClass':'right','sWidth': '6%'",
+    		],
+    	    "headers":[
+    		"№",
+    		"",
+    		"",
+    		"Статус заказа",
+    		"Номер заказа.",
+    		"Сумма неотгр",
+    		"Комментарий",
+    		"Дата",
+    		"Отгрузка",
+    		"Сумма отгрузки"],
+    	    "render":[
+    		"\"targets\":1,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-print\"></i></a>'}else return '';}",
+    		"\"targets\":2,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-edit\"></i></a>'}else return '';}",
+    		],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":1,
+        },
+        
+	"dept-structure":{
+    	    "ajax":[
+    		"begindate:$('#from').val()",
+    		"enddate:$('#to').val()",
+		"user:function(){if($('#contractor').val()){return $('#contractor').val()}else{return $('meta[name=useref]').attr('rel')}}",    		
+		"report:'dept-structure'"],
+    	    "databind":[
+    		"data:'row_id'",
+    		"data:null",
+    		"data:null",
+    		"data:'row.3.value'",
+    		"data:'row.4.value'",
+    		"data:'row.5.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.6.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.7.value','sClass':'right','sWidth': '16%'",
+    		"data:'row.8.value','sClass':'right','sWidth': '16%'",
+    		],
+    	    "headers":[
+    		"№",
+    		"",
+    		"",
+    		"Документ",
+    		"Просрочено дн..",
+    		"",
+    		"Ожидается дн.",
+    		"",
+    		"Всего"],
+    	    "render":[
+    		"\"targets\":1,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-print\"></i></a>'}else return '';}",
+    		"\"targets\":2,\"render\":function(data,type,full,meta){;if(data.row[3].value!=''){return '<a href=\"#\"><i class=\"fa fa-edit\"></i></a>'}else return '';}",
+    		],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":1,
+        },
+    },    
+    "journals":{
+	"invoice":{
+	    "ajax":[
+    		"begindate:$('#from').val()",
+    		"enddate:$('#to').val()",
+    		"user:function(){if($('#contractor').val()){return $('#contractor').val()}else{return $('meta[name=useref]').attr('rel')}}",
+    		"report:'invoice'"
+    		],
+	    "databind":[
+		
+    		"data:'row.2.value'",
+    		"data:'row_id'",
+    		"data:'row_id'",
+    		"data:'row.3.value'",
+    		"data:'row.4.value'",
+    		"data:'row.11.value'",
+    		"data:'row.8.value'",
+    		"data:'row.6.value'",
+    		"data:'row.9.value'",
+    		"data:'row.5.value'",
+		"data:null",
+    		"data:null",
+    		"data:null",
+    
+	    ],
+	    "headers":[
+		"<th>Статус</th>",
+		"<th data-class=\"expand\">N</th>",
+		"<th data-hide='phone'><label class=\"checkbox\"><input type=\"checkbox\" name=\"checkbox-inline\"><i></i></label></th>",
+		"<th data-hide='phone'>Дата</th>",
+		"<th data-hide='phone'>Номер</th>",
+		"<th data-hide='phone,tablet'>Контрагент</th>",
+		"<th data-hide='phone'>Сумма</th>",
+		"<th data-hide='phone,tablet'><i class=\"fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs\"></i>Адрес</th>",
+		"<th data-hide='phone,tablet'>Автор документа</th>",
+		"<th data-hide='phone,tablet,desktop'>Комментарий</th>",
+		"<th>Изм.</th>",
+		"<th>Уд.</th>",
+		"<th data-hide='phone,tablet'>Печ.</th>"
+		],
+	    "render":[
+    		"\"targets\":0,\"render\":function(data,type,full,meta){if(data='3'){return '<i class=\"fa fa-check txt-color-green\"></i>'}else return '';}",
+    		"\"targets\":2,\"render\":function(data,type,full,meta){return '<label class=\"checkbox\" style=\" width:20px;\" ><input type=\"checkbox\"  name=\"checkbox-inline\"><i></i></label>';}",
+    		"\"targets\":4,\"render\":function(data,type,full,meta){return '<a href=\"#\" name=\"number\"  data-type=\"text\" data-pk=\"1\" data-placeholder=\"Введите номер...\" data-original-title=\"Номер документа\" class=\"editable editable-pre-wrapped editable-click\">'+data+'</a>';}",
+    		"\"targets\":5,\"render\":function(data,type,full,meta){return '<a href=\"#\" name=\"user\"    data-type=\"select2\"  data-pk=\"1\" data-select-search=\"true\" data-value=\"'+data+'\" data-original-title=\"Выберете контрагента\" class=\"editable editable-click\"></a>';}",
+    		"\"targets\":7,\"render\":function(data,type,full,meta){return '<a href=\"#\" name=\"address\" data-type=\"select2\"  data-pk=\"1\" data-select-search=\"true\" data-value=\"'+data+'\"  data-original-title=\"Выберете адрес доставки\" class=\"editable editable-click\"></a>';}",
+    		"\"targets\":9,\"render\":function(data,type,full,meta){return '<a href=\"#\" name=\"comment\" data-type=\"textarea\" data-pk=\"1\" data-placeholder=\"Напишите свой комментарий...\" data-original-title=\"Комментарий\" class=\"editable editable-pre-wrapped editable-click\">'+data+'</a>';}",
+    		"\"targets\":10,\"render\":function(data,type,full,meta){return '<a href=\"#\"><i class=\"fa fa-edit\"></i></a>';}",
+    		"\"targets\":11,\"render\":function(data,type,full,meta){return '<a href=\"#\"><i class=\"fa fa-times\"></i></a>';}",
+    		"\"targets\":12,\"render\":function(data,type,full,meta){return '<a href=\"#\"><i class=\"fa fa-print\"></i></a>';}",
+	    ],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":2,
+	},
+	"sale":{
+	    "ajax":[],
+	    "databind":[],
+	    "headers":[
+	    "",
+	    ],
+	    "render":[],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":2,
+	
+	},
+	"payment":{
+	    "ajax":[],
+	    "databind":[],
+	    "headers":[
+	    "",
+	    ],
+	    "render":[],
+    	    "hasdaterange":true,
+    	    "argcount":7,
+    	    "querytype":2,
+	
+	},
+    },
+
+    
+}
+

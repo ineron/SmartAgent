@@ -1,0 +1,8 @@
+{
+    subject:"Тема письма",
+    files:[
+	"file1.xls",
+	"file2.xls",
+    ],
+    message:" Текст письма "
+}

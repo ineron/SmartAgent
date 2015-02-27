@@ -1,0 +1,32 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+
+/*
+digit float
+text
+date time
+ref
+
+*/
+
+class any {
+
+public:
+    std::stringstream text;
+
+    template<typename T>
+    any(const T& value) {
+        text << value;
+    }
+    
+protected:
+    void* ptr_;
+private:
+    friend std::ostream& operator << (std::ostream& os, const any& value) {
+        os << value.text.str();
+        return os;
+    }
+
+};
+

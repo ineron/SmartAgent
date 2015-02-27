@@ -1,0 +1,559 @@
+<% c++ #include "data/tmpl_catalog.h" %>
+<% skin defskin %>
+<% view Catalog uses Data::Catalog  %>
+
+
+<% template catalog_row(Data::CatalogItem item)%>
+<tr class="">
+    <td class=""><div class="table-f1"><span"><%= item.code %></span></div></td>
+    <td title="<%= item.articul %>" class="light_gray"><div"><span><%= item.articul %></span></div></td>
+    <td title="<%= item.brief |raw %>"> <div><span"><%= item.brief | raw %></span></div></td>
+    <td title="<strong><%= item.pack %></strong>"><div><span"><%= item.pack %></span></div></td>
+    <td title="<%= item.price %>" ><span><%= item.price %></span></td>
+    <% if is_signed %>
+    <td class="col-md-2"><div><input type="text" class="col-md-2"></div></td>
+    <td></td>
+    <% end %>
+</tr>
+<% end template%>
+
+
+<% template catalog_group(Data::CatalogItem item)%>
+<tr class="">
+    <% if item.is_hidden %>
+	<td colspan="2">
+	    <div class="fit-img">
+		<img src="media/img/catalog/<%= catalogImagePath %>/<%= item.file %> ">
+	    </div>
+	</td>
+	<td class="" colspan="5">
+		<div class="comment">
+		    <%= item.description | raw %>
+		</div>
+	</td>
+    <% else %>
+	<td class="table-f1" colspan="7"><span><strong><%= item.name %></strong></span></td>
+    <% end %>
+</tr>
+<% end template%>
+
+
+<% template catalog_widget(Data::CatalogPage items ) %>
+    <div class="widget-body no-padding col-sm-<%= colSize %> col-md-<%= colSize %> col-lg-<%= colSize %>">
+	    <fieldset>
+		<div class="form-group">
+		    <table id="catalog_table" class="table table-striped table-bordered table-hover dataTable no-footer">
+		    <thead>
+			<th>Код</th>
+			<th>Доп.<br/>инфо</th>
+			<th>Описание<br/> товара</th>
+			<th>Упаковка/ Коробка</th>
+			<th>Цена</th>
+			<% if is_signed %>
+			<th></th>
+			<th></th>
+			<% end %>
+		    </thead>
+			<tbody>
+			<% foreach item in items %>
+			    <% item %>
+				<% if item.is_group %>
+				    <% include catalog_group(item) %>
+				<% else %>
+				    <% include catalog_row(item) %>
+				<% end %>
+			    <% end %>
+		        <% end %>
+		        </tbody>
+		    </table>
+		</div>
+	    </fieldset>
+    </div>
+<% end template %>
+
+
+<% template render__() %>
+<div class="row">
+    <div class="jarviswidget jarviswidget-color-blueDark">
+	<header>
+	    <h2><%= paragraph %></h2>
+	</header>
+	<div role="content">
+	    <!-- widget edit box -->
+	    <div class="jarviswidget-editbox">
+		<!-- This area used as dropdown edit box -->
+	    </div>
+		<!-- end widget edit box -->
+	    <div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer">
+		<form>
+		    <fieldset>
+			<div class="form-group">
+			    <table id="catalog_table" class="table table-striped table-bordered table-hover dataTable no-footer">
+				<thead>
+        			<tr>
+            			<th>File</th>
+            			<th>Name</th>
+            			<th>Pack</th>
+            			<th>price</th>
+            			<th>Quantity</th>
+            			<th>Remains</th>
+        			</tr>
+    				</thead>
+			    </table>
+			</div>
+		    </fieldset>
+		</form>
+	    </div>
+	</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    pageSetUp();
+
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     */
+    
+    // PAGE RELATED SCRIPTS
+    
+    // pagefunction	
+    var pagefunction = function() {
+	console.log("pageFunction= ",$(window).width());
+
+        $(window).resize(function() {
+		$('body').prepend('<div>' + $(window).width() + '</div>');
+		console.log("resize to ",$(window).width());
+	});
+
+	
+	/* // DOM Position key index //
+	
+	    l - Length changing (dropdown)
+	    f - Filtering input (search)
+	    t - The Table! (datatable)
+	    i - Information (records)
+	    p - Pagination (paging)
+	    r - pRocessing 
+	    < and > - div elements
+	    <"#id" and > - div with an id
+	    <"class" and > - div with a class
+	    <"#id.class" and > - div with an id and class
+	    
+	    Also see: http://legacy.datatables.net/usage/features
+	*/	
+
+	/* BASIC ;*/
+	    var responsiveHelper_catalog_table = undefined;
+	    var responsiveHelper_datatable_fixed_column = undefined;
+	    var responsiveHelper_datatable_col_reorder = undefined;
+	    var responsiveHelper_datatable_tabletools = undefined;
+	    
+
+	    var breakpointDefinition = {
+		tablet : 1024,
+		phone : 480
+	    };
+
+
+
+	    $('#catalog_table').dataTable({
+		"autoWidth" : false,
+		"processing": true,
+		"serverSide": true,
+		"ajax" : {
+		    "url" : "catalog-data",
+		},
+    		"columns": [
+        	    { "data": "file" },
+        	    { "data": "name" },
+        	    { "data": "pack" },
+        	    { "data": "price" },
+        	    { "data": "quantity" },
+        	    { "data": "remains" }
+    		],
+		"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+		    "t"+
+		    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+
+		"preDrawCallback" : function() {
+		    // Initialize the responsive datatables helper once.
+		    if (!responsiveHelper_catalog_table) {
+			responsiveHelper_catalog_table = new ResponsiveDatatablesHelper($('#catalog_table'), breakpointDefinition);
+		    }
+		},
+		"rowCallback" : function(nRow) {
+		    responsiveHelper_catalog_table.createExpandIcon(nRow);
+		},
+
+		"drawCallback" : function(oSettings) {
+		    responsiveHelper_catalog_table.respond();
+		}
+
+	    });
+
+    };
+
+    loadScript("media/js/plugin/datatables/jquery.dataTables.min.js", function(){
+	loadScript("media/js/plugin/datatables/dataTables.colVis.min.js", function(){
+	    loadScript("media/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+		loadScript("media/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+			loadScript("media/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+		});
+	    });
+	});
+    });
+
+
+    $(".comment").shorten();
+    $(".comment-small").shorten({showChars: 10});
+
+
+</script>
+
+<% end template %>
+
+
+<% tamplate tables() %>
+
+	<% foreach item in catalog %>
+	<% item %>
+	    <% include catalog_widget(item) %>
+	<% end %>
+	<% end %>
+
+<% end template %>
+
+
+<% tamplate header() %>
+
+<div class="row">
+    <div class="jarviswidget jarviswidget-color-blueDark">
+	<header>
+	    <h2><%= paragraph %></h2>
+	</header>
+	<div role="content">
+	<!-- widget edit box -->
+	<div class="jarviswidget-editbox">
+		<!-- This area used as dropdown edit box -->
+	</div>
+	<!-- end widget edit box -->
+	<div id="dt_basic_wrapper" class="dataTables_wrapper form-inline no-footer"></div>
+	<form id="dt_catalog"></form>
+	<div class="dt-toolbar-footer">
+	    <div class="col-sm-6 col-xs-12 hidden-xs">
+	        <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">Показаны с
+		    <span class="txt-color-darken">1</span> по <span class="txt-color-darken">10</span> из 
+		    <span class="text-primary">100</span> имеющихся
+	        </div>
+		<div id="paginator" class="col-xs-12 col-sm-6">	</div>
+	    </div>
+	</div>	    
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     */
+    
+    // PAGE RELATED SCRIPTS
+    
+    // pagefunction	
+    var pagefunction = function() {
+	console.log("pageFunction");
+	
+	/* // DOM Position key index //
+	
+	    l - Length changing (dropdown)
+	    f - Filtering input (search)
+	    t - The Table! (datatable)
+	    i - Information (records)
+	    p - Pagination (paging)
+	    r - pRocessing 
+	    < and > - div elements
+	    <"#id" and > - div with an id
+	    <"class" and > - div with a class
+	    <"#id.class" and > - div with an id and class
+	    
+	    Also see: http://legacy.datatables.net/usage/features
+	*/	
+
+	/* BASIC ;*/
+	    var responsiveHelper_dt_basic = undefined;
+	    var responsiveHelper_datatable_fixed_column = undefined;
+	    var responsiveHelper_datatable_col_reorder = undefined;
+	    var responsiveHelper_datatable_tabletools = undefined;
+	    
+
+	    var breakpointDefinition = {
+		tablet : 1024,
+		phone : 480
+	    };
+
+	    $(window).resize(function() {
+		//$('body').prepend('<div>' + $(window).width() + '</div>');
+		console.log("resize",$(window).width());
+		//console.log("height ",$('#panel_1').geight());
+	    });
+
+
+	    $(".pagination").on("click", function () {
+		var paginator = $(".pagination>li");
+		console.log("paginator ",paginator.lenght);
+	    });
+
+
+	    $('#catalog__table').dataTable({
+		"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
+		    "t"+
+		    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+		"autoWidth" : true,
+		"preDrawCallback" : function() {
+		    // Initialize the responsive datatables helper once.
+		    if (!responsiveHelper_dt_basic) {
+			responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+		    }
+		},
+		"rowCallback" : function(nRow) {
+		    responsiveHelper_dt_basic.createExpandIcon(nRow);
+		},
+		"drawCallback" : function(oSettings) {
+		    responsiveHelper_dt_basic.respond();
+		}
+	    });
+
+	/* END BASIC */
+	
+	/* COLUMN FILTER  */
+        var otable = $('#datatable_fixed_column').DataTable({
+    	//"bFilter": false,
+    	//"bInfo": false,
+    	//"bLengthChange": false
+    	//"bAutoWidth": false,
+    	//"bPaginate": false,
+    	//"bStateSave": true // saves sort state using localStorage
+	    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
+		    "t"+
+		    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+	    "autoWidth" : true,
+	    "preDrawCallback" : function() {
+		// Initialize the responsive datatables helper once.
+		if (!responsiveHelper_datatable_fixed_column) {
+		    responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+		}
+	    },
+	    "rowCallback" : function(nRow) {
+		responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+	    },
+	    "drawCallback" : function(oSettings) {
+		responsiveHelper_datatable_fixed_column.respond();
+	    }		
+	
+        });
+        
+        // custom toolbar
+        $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+    	   
+        // Apply the filter
+        $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
+    	
+            otable
+                .column( $(this).parent().index()+':visible' )
+                .search( this.value )
+                .draw();
+                
+        } );
+        /* END COLUMN FILTER */   
+    
+	/* COLUMN SHOW - HIDE */
+	$('#datatable_col_reorder').dataTable({
+	    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>"+
+		    "t"+
+		    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+	    "autoWidth" : true,
+	    "preDrawCallback" : function() {
+		// Initialize the responsive datatables helper once.
+		if (!responsiveHelper_datatable_col_reorder) {
+		    responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+		}
+	    },
+	    "rowCallback" : function(nRow) {
+		responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+	    },
+	    "drawCallback" : function(oSettings) {
+		responsiveHelper_datatable_col_reorder.respond();
+	    }			
+	});
+	
+	/* END COLUMN SHOW - HIDE */
+
+	/* TABLETOOLS */
+	$('#datatable_tabletools').dataTable({
+	    
+	    // Tabletools options: 
+	    //   https://datatables.net/extensions/tabletools/button_options
+	    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>"+
+		    "t"+
+		    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+            "oTableTools": {
+        	 "aButtons": [
+                 "copy",
+                 "csv",
+                 "xls",
+                    {
+                        "sExtends": "pdf",
+                        "sTitle": "SmartAdmin_PDF",
+                        "sPdfMessage": "SmartAdmin PDF Export",
+                        "sPdfSize": "letter"
+                    },
+                    {
+                	"sExtends": "print",
+                	"sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+            	}
+                 ],
+                "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+            },
+	    "autoWidth" : true,
+	    "preDrawCallback" : function() {
+		// Initialize the responsive datatables helper once.
+		if (!responsiveHelper_datatable_tabletools) {
+		    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+		}
+	    },
+	    "rowCallback" : function(nRow) {
+		responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+	    },
+	    "drawCallback" : function(oSettings) {
+		responsiveHelper_datatable_tabletools.respond();
+	    }
+	});
+	
+	/* END TABLETOOLS */
+
+    };
+
+    // load related plugins
+    
+    loadScript("media/js/plugin/jquery-bootpag/jquery.bootpag.min.js",function(){
+    
+	    console.log("load paginator");
+	    $('#paginator').bootpag({
+		total: 150,          // total pages
+		page: 1,            // default page
+		maxVisible: 7,     // visible pagination
+		leaps: true         // next/prev leaps through maxVisible
+	    }).on("page", function(event, num){
+		$("#dt_basic_wrapper").html("Page " + num); // or some ajax content loading...
+		// ... after content load -> change total to 10
+		$(this).bootpag({total: 150, maxVisible: 7});
+		
+		$.ajax({
+	            //type:"POST",
+	            data: {
+		            'start': 1,
+		            'clumn': 4,
+		            'length': 200,
+		            'mode': 1
+	            },
+	            dataType: "json",
+	            url: "catalog-data",
+	            success: function(data){
+	        	    items = new Array();
+	        	    items = data.data;
+
+/******************/
+
+/******************/
+                		//делаешь что-нить с ними, например так alert(domains[i].status_str)
+                		console.log("Item.....",datatable[i].code)
+	        	    
+		});
+	    });
+    });
+    
+    loadScript("media/js/plugin/datatables/jquery.dataTables.min.js", function(){
+	loadScript("media/js/plugin/datatables/dataTables.colVis.min.js", function(){
+	    loadScript("media/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+		loadScript("media/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+			loadScript("media/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+		});
+	    });
+	});
+    });
+
+    //loadScript("media/js/plugin/jquery-shorten/jquery.shorten.js", function(){});
+
+    $(".comment").shorten({
+    
+    });
+    $(".comment-small").shorten({showChars: 10});
+
+
+</script>
+
+
+<% end template %>
+
+<% template render() %>
+    <% if header %>
+	<% include template header() %>
+    <% else %>
+	<% include template tables() %>
+    <% end %>
+<% end template %>
+
+<% end view %>
+<% end skin %>

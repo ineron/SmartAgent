@@ -1,0 +1,1406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+		xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/"
+		xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/"
+		xmlns:tns="http://80.249.178.90:8025/FIT-SPB/"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:xsd1="http://80.249.178.90:8025/FIT-SPB/"
+		xmlns:xsd2="http://v8.1c.ru/8.1/data/core"
+		name="InfoBase"
+		targetNamespace="http://80.249.178.90:8025/FIT-SPB/">
+	<types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:xs1="http://80.249.178.90:8025/FIT-SPB/"
+				xmlns:xs2="http://v8.1c.ru/8.1/data/core"
+				targetNamespace="http://80.249.178.90:8025/FIT-SPB/"
+				attributeFormDefault="unqualified"
+				elementFormDefault="qualified">
+			<xs:import namespace="http://v8.1c.ru/8.1/data/core"/>
+			<xs:complexType name="Object">
+				<xs:sequence>
+					<xs:element name="StorageTableName"
+							type="xs:string"/>
+					<xs:element name="StorageFieldName"
+							type="xs:string"/>
+					<xs:element name="FieldName"
+							type="xs:string"/>
+					<xs:element name="Metadata"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Structure">
+				<xs:sequence>
+					<xs:element name="Objects"
+							type="tns:Object"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetAmountGoods">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Period"
+								type="xs:dateTime"
+								nillable="true"/>
+						<xs:element name="Options"
+								type="xs2:Structure"
+								nillable="true"/>
+						<xs:element name="Selections"
+								type="xs2:Structure"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAmountGoodsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStructureInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TableName"
+								type="xs:string"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStructureInfoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="tns:Object"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ДниОтсутствия">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="НачалоПериода"
+								type="xs:dateTime"/>
+						<xs:element name="КонецПериода"
+								type="xs:dateTime"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ДниОтсутствияResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ИнформационныеБазы">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ИнформационныеБазыResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="НеВыполненныйСпрос">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДатаНачала"
+								type="xs:dateTime"/>
+						<xs:element name="ДатаОкончания"
+								type="xs:dateTime"/>
+						<xs:element name="ТолькоСети"
+								type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="НеВыполненныйСпросResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Остатки">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДатаОстатков"
+								type="xs:date"/>
+						<xs:element name="УчитыватьСтатусыДокументов"
+								type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ОстаткиResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ПолучитьКурсыВалют">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Период"
+								type="xs:dateTime"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ПолучитьКурсыВалютResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ПолучитьЦеныНоменклатуры">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Номенклатура"
+								type="xs2:ValueListType"
+								nillable="true"/>
+						<xs:element name="ТипыЦен"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ПолучитьЦеныНоменклатурыResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Продажи">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДатаНачала"
+								type="xs:dateTime"/>
+						<xs:element name="ДатаОкончания"
+								type="xs:dateTime"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ПродажиResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="РасчитатьАномальныйСпрос">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДатаОтсчета"
+								type="xs:date"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="РасчитатьАномальныйСпросResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ТоварыВПути">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДатаНачала"
+								type="xs:dateTime"/>
+						<xs:element name="ДатаОкончания"
+								type="xs:dateTime"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ТоварыВПутиResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="УниверсальныйЗапрос">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="СистемноеВыражение"
+								type="xs:string"
+								nillable="true"/>
+						<xs:element name="НаименованиеЗапроса"
+								type="xs:string"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="УниверсальныйЗапросResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="РасширенныйЗапрос">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="СистемноеВыражение"
+								type="xs:string"
+								nillable="true"/>
+						<xs:element name="НаименованиеЗапроса"
+								type="xs:string"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="РасширенныйЗапросResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTree"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦеныНоменклатурыПоГТД">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Период"
+								type="xs:dateTime"
+								nillable="true"/>
+						<xs:element name="Номенклатура"
+								type="xs2:ValueListType"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦеныНоменклатурыПоГТДResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦеныНоменклатурыПоПериодам">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Периоды"
+								type="xs2:ValueListType"
+								nillable="true"/>
+						<xs:element name="Номенклатура"
+								type="xs2:ValueListType"
+								nillable="true"/>
+						<xs:element name="ТипыЦен"
+								type="xs2:ValueListType"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЦеныНоменклатурыПоПериодамResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЗаписатьДанные">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ДанныеОбъекта"
+								type="xs:string"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ЗаписатьДанныеResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs:boolean"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryUniversal">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SystemExpression"
+								type="xs:string"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryUniversalResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return"
+								type="xs2:ValueTable"
+								nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:tns="http://v8.1c.ru/8.1/data/core"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				targetNamespace="http://v8.1c.ru/8.1/data/core"
+				attributeFormDefault="unqualified"
+				elementFormDefault="qualified">
+			<xs:simpleType name="AllowedLength">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Fixed"/>
+					<xs:enumeration value="Variable"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="AllowedSign">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Any"/>
+					<xs:enumeration value="Nonnegative"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="Array">
+				<xs:sequence>
+					<xs:element name="Value"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BinaryDataQualifiers">
+				<xs:sequence>
+					<xs:element name="Length"
+							type="xs:decimal"/>
+					<xs:element name="AllowedLength"
+							type="tns:AllowedLength"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="CompositeID">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="-?[0-9]+(:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="DataFillError">
+				<xs:sequence>
+					<xs:element name="Data"
+							type="xs:string"/>
+					<xs:element name="DataDescr"
+							type="xs:string"/>
+					<xs:element name="Text"
+							type="xs:string"/>
+					<xs:element name="Status"
+							type="tns:FillCheckErrorStatus"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DataFillErrors">
+				<xs:sequence>
+					<xs:element name="item"
+							type="tns:DataFillError"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="DateFractions">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Date"/>
+					<xs:enumeration value="Time"/>
+					<xs:enumeration value="DateTime"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="DateQualifiers">
+				<xs:sequence>
+					<xs:element name="DateFractions"
+							type="tns:DateFractions"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Exception">
+				<xs:complexContent>
+					<xs:extension base="tns:GenericException">
+						<xs:sequence>
+							<xs:element name="data"
+									type="xs:base64Binary"
+									minOccurs="0"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:simpleType name="FillCheckErrorStatus">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Error"/>
+					<xs:enumeration value="Warning"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FillChecking">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="DontCheck"/>
+					<xs:enumeration value="ShowError"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="FixedArray">
+				<xs:sequence>
+					<xs:element name="Value"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FixedMap">
+				<xs:sequence>
+					<xs:element name="pair"
+							type="tns:KeyAndValue"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FixedStructure">
+				<xs:sequence>
+					<xs:element name="Property"
+							minOccurs="0"
+							maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Value"
+										nillable="true"/>
+							</xs:sequence>
+							<xs:attribute name="name"
+									type="xs:NMTOKEN"
+									use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GenericException"
+					abstract="true">
+				<xs:sequence>
+					<xs:element name="descr"
+							type="xs:string"/>
+					<xs:element name="inner"
+							type="tns:GenericException"
+							minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="clsid"
+						type="tns:UUID"
+						use="required"/>
+				<xs:attribute name="encoded"
+						type="xs:boolean"
+						default="false"/>
+			</xs:complexType>
+			<xs:complexType name="KeyAndValue">
+				<xs:sequence>
+					<xs:element name="Key"/>
+					<xs:element name="Value"
+							nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LocalStringItemType">
+				<xs:sequence>
+					<xs:element name="lang"
+							type="xs:NMTOKEN"/>
+					<xs:element name="content"
+							type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LocalStringType">
+				<xs:sequence>
+					<xs:element name="item"
+							type="tns:LocalStringItemType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Map">
+				<xs:sequence>
+					<xs:element name="pair"
+							type="tns:KeyAndValue"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="Null">
+				<xs:restriction base="xs:string">
+					<xs:length value="0"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="NumberQualifiers">
+				<xs:sequence>
+					<xs:element name="Digits"
+							type="xs:decimal"/>
+					<xs:element name="FractionDigits"
+							type="xs:decimal"/>
+					<xs:element name="AllowedSign"
+							type="tns:AllowedSign"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StandardBeginningDate">
+				<xs:sequence>
+					<xs:element name="variant"/>
+					<xs:element name="date"
+							type="xs:dateTime"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="StandardBeginningDateVariant">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Custom"/>
+					<xs:enumeration value="BeginningOfThisDay"/>
+					<xs:enumeration value="BeginningOfThisWeek"/>
+					<xs:enumeration value="BeginningOfThisTenDays"/>
+					<xs:enumeration value="BeginningOfThisMonth"/>
+					<xs:enumeration value="BeginningOfThisQuarter"/>
+					<xs:enumeration value="BeginningOfThisHalfYear"/>
+					<xs:enumeration value="BeginningOfThisYear"/>
+					<xs:enumeration value="BeginningOfLastDay"/>
+					<xs:enumeration value="BeginningOfLastWeek"/>
+					<xs:enumeration value="BeginningOfLastTenDays"/>
+					<xs:enumeration value="BeginningOfLastMonth"/>
+					<xs:enumeration value="BeginningOfLastQuarter"/>
+					<xs:enumeration value="BeginningOfLastHalfYear"/>
+					<xs:enumeration value="BeginningOfLastYear"/>
+					<xs:enumeration value="BeginningOfNextDay"/>
+					<xs:enumeration value="BeginningOfNextWeek"/>
+					<xs:enumeration value="BeginningOfNextTenDays"/>
+					<xs:enumeration value="BeginningOfNextMonth"/>
+					<xs:enumeration value="BeginningOfNextQuarter"/>
+					<xs:enumeration value="BeginningOfNextHalfYear"/>
+					<xs:enumeration value="BeginningOfNextYear"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="StandardPeriod">
+				<xs:sequence>
+					<xs:element name="variant"/>
+					<xs:element name="startDate"
+							type="xs:dateTime"
+							minOccurs="0"/>
+					<xs:element name="endDate"
+							type="xs:dateTime"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="StandardPeriodVariant">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Custom"/>
+					<xs:enumeration value="Today"/>
+					<xs:enumeration value="ThisWeek"/>
+					<xs:enumeration value="ThisTenDays"/>
+					<xs:enumeration value="ThisMonth"/>
+					<xs:enumeration value="ThisQuarter"/>
+					<xs:enumeration value="ThisHalfYear"/>
+					<xs:enumeration value="ThisYear"/>
+					<xs:enumeration value="FromBeginningOfThisWeek"/>
+					<xs:enumeration value="FromBeginningOfThisTenDays"/>
+					<xs:enumeration value="FromBeginningOfThisMonth"/>
+					<xs:enumeration value="FromBeginningOfThisQuarter"/>
+					<xs:enumeration value="FromBeginningOfThisHalfYear"/>
+					<xs:enumeration value="FromBeginningOfThisYear"/>
+					<xs:enumeration value="Yesterday"/>
+					<xs:enumeration value="LastWeek"/>
+					<xs:enumeration value="LastTenDays"/>
+					<xs:enumeration value="LastMonth"/>
+					<xs:enumeration value="LastQuarter"/>
+					<xs:enumeration value="LastHalfYear"/>
+					<xs:enumeration value="LastYear"/>
+					<xs:enumeration value="LastWeekTillSameWeekDay"/>
+					<xs:enumeration value="LastTenDaysTillSameDayNumber"/>
+					<xs:enumeration value="LastMonthTillSameDate"/>
+					<xs:enumeration value="LastQuarterTillSameDate"/>
+					<xs:enumeration value="LastHalfYearTillSameDate"/>
+					<xs:enumeration value="LastYearTillSameDate"/>
+					<xs:enumeration value="Tomorrow"/>
+					<xs:enumeration value="NextWeek"/>
+					<xs:enumeration value="NextTenDays"/>
+					<xs:enumeration value="NextMonth"/>
+					<xs:enumeration value="NextQuarter"/>
+					<xs:enumeration value="NextHalfYear"/>
+					<xs:enumeration value="NextYear"/>
+					<xs:enumeration value="NextWeekTillSameWeekDay"/>
+					<xs:enumeration value="NextTenDaysTillSameDayNumber"/>
+					<xs:enumeration value="NextMonthTillSameDate"/>
+					<xs:enumeration value="NextQuarterTillSameDate"/>
+					<xs:enumeration value="NextHalfYearTillSameDate"/>
+					<xs:enumeration value="NextYearTillSameDate"/>
+					<xs:enumeration value="TillEndOfThisWeek"/>
+					<xs:enumeration value="TillEndOfThisTenDays"/>
+					<xs:enumeration value="TillEndOfThisMonth"/>
+					<xs:enumeration value="TillEndOfThisQuarter"/>
+					<xs:enumeration value="TillEndOfThisHalfYear"/>
+					<xs:enumeration value="TillEndOfThisYear"/>
+					<xs:enumeration value="Last7Days"/>
+					<xs:enumeration value="Next7Days"/>
+					<xs:enumeration value="Month"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="StringQualifiers">
+				<xs:sequence>
+					<xs:element name="Length"
+							type="xs:decimal"/>
+					<xs:element name="AllowedLength"
+							type="tns:AllowedLength"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Structure">
+				<xs:sequence>
+					<xs:element name="Property"
+							minOccurs="0"
+							maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Value"
+										nillable="true"/>
+							</xs:sequence>
+							<xs:attribute name="name"
+									type="xs:NMTOKEN"
+									use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="Type">
+				<xs:restriction base="xs:QName"/>
+			</xs:simpleType>
+			<xs:complexType name="TypeDescription">
+				<xs:sequence>
+					<xs:element name="Type"
+							type="xs:QName"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="TypeSet"
+							type="xs:QName"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="TypeId"
+							type="tns:UUID"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="NumberQualifiers"
+							type="tns:NumberQualifiers"
+							minOccurs="0"/>
+					<xs:element name="StringQualifiers"
+							type="tns:StringQualifiers"
+							minOccurs="0"/>
+					<xs:element name="DateQualifiers"
+							type="tns:DateQualifiers"
+							minOccurs="0"/>
+					<xs:element name="BinaryDataQualifiers"
+							type="tns:BinaryDataQualifiers"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="UUID">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="ValueListItemType">
+				<xs:sequence>
+					<xs:element name="value"
+							nillable="true"/>
+					<xs:element name="presentation"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="checkState"
+							type="xs:decimal"
+							minOccurs="0"/>
+					<xs:element name="picture"
+							minOccurs="0"/>
+					<xs:element name="id"
+							type="xs:long"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueListType">
+				<xs:sequence>
+					<xs:element name="valueType"
+							type="tns:TypeDescription"/>
+					<xs:element name="availableValues"
+							type="tns:ValueListType"
+							minOccurs="0"/>
+					<xs:element name="item"
+							type="tns:ValueListItemType"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="lastId"
+							type="xs:long"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="ValueStorage">
+				<xs:restriction base="xs:base64Binary"/>
+			</xs:simpleType>
+			<xs:complexType name="ValueTable">
+				<xs:sequence>
+					<xs:element name="column"
+							type="tns:ValueTableColumn"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="index"
+							type="tns:ValueTableIndex"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="row"
+							type="tns:ValueTableRow"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTableColumn">
+				<xs:sequence>
+					<xs:element name="Name"
+							type="xs:NMTOKEN"
+							minOccurs="0"/>
+					<xs:element name="ValueType"
+							type="tns:TypeDescription"
+							minOccurs="0"/>
+					<xs:element name="Title"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="Width"
+							type="xs:nonNegativeInteger"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTableIndex">
+				<xs:sequence>
+					<xs:element name="column"
+							type="xs:NMTOKEN"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTableRow">
+				<xs:sequence>
+					<xs:element name="Value"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTree">
+				<xs:sequence>
+					<xs:element name="column"
+							type="tns:ValueTreeColumn"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="row"
+							type="tns:ValueTreeRow"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTreeColumn">
+				<xs:sequence>
+					<xs:element name="Name"
+							type="xs:NMTOKEN"
+							minOccurs="0"/>
+					<xs:element name="ValueType"
+							type="tns:TypeDescription"
+							minOccurs="0"/>
+					<xs:element name="Title"
+							type="xs:string"
+							minOccurs="0"/>
+					<xs:element name="Width"
+							type="xs:nonNegativeInteger"
+							minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ValueTreeRow">
+				<xs:sequence>
+					<xs:element name="row"
+							type="tns:ValueTreeRow"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+					<xs:element name="Value"
+							nillable="true"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</types>
+	<message name="GetAmountGoodsRequestMessage">
+		<part name="parameters"
+				element="tns:GetAmountGoods"/>
+	</message>
+	<message name="GetAmountGoodsResponseMessage">
+		<part name="parameters"
+				element="tns:GetAmountGoodsResponse"/>
+	</message>
+	<message name="GetStructureInfoRequestMessage">
+		<part name="parameters"
+				element="tns:GetStructureInfo"/>
+	</message>
+	<message name="GetStructureInfoResponseMessage">
+		<part name="parameters"
+				element="tns:GetStructureInfoResponse"/>
+	</message>
+	<message name="ДниОтсутствияRequestMessage">
+		<part name="parameters"
+				element="tns:ДниОтсутствия"/>
+	</message>
+	<message name="ДниОтсутствияResponseMessage">
+		<part name="parameters"
+				element="tns:ДниОтсутствияResponse"/>
+	</message>
+	<message name="ИнформационныеБазыRequestMessage">
+		<part name="parameters"
+				element="tns:ИнформационныеБазы"/>
+	</message>
+	<message name="ИнформационныеБазыResponseMessage">
+		<part name="parameters"
+				element="tns:ИнформационныеБазыResponse"/>
+	</message>
+	<message name="НеВыполненныйСпросRequestMessage">
+		<part name="parameters"
+				element="tns:НеВыполненныйСпрос"/>
+	</message>
+	<message name="НеВыполненныйСпросResponseMessage">
+		<part name="parameters"
+				element="tns:НеВыполненныйСпросResponse"/>
+	</message>
+	<message name="ОстаткиRequestMessage">
+		<part name="parameters"
+				element="tns:Остатки"/>
+	</message>
+	<message name="ОстаткиResponseMessage">
+		<part name="parameters"
+				element="tns:ОстаткиResponse"/>
+	</message>
+	<message name="ПолучитьКурсыВалютRequestMessage">
+		<part name="parameters"
+				element="tns:ПолучитьКурсыВалют"/>
+	</message>
+	<message name="ПолучитьКурсыВалютResponseMessage">
+		<part name="parameters"
+				element="tns:ПолучитьКурсыВалютResponse"/>
+	</message>
+	<message name="ПолучитьЦеныНоменклатурыRequestMessage">
+		<part name="parameters"
+				element="tns:ПолучитьЦеныНоменклатуры"/>
+	</message>
+	<message name="ПолучитьЦеныНоменклатурыResponseMessage">
+		<part name="parameters"
+				element="tns:ПолучитьЦеныНоменклатурыResponse"/>
+	</message>
+	<message name="ПродажиRequestMessage">
+		<part name="parameters"
+				element="tns:Продажи"/>
+	</message>
+	<message name="ПродажиResponseMessage">
+		<part name="parameters"
+				element="tns:ПродажиResponse"/>
+	</message>
+	<message name="РасчитатьАномальныйСпросRequestMessage">
+		<part name="parameters"
+				element="tns:РасчитатьАномальныйСпрос"/>
+	</message>
+	<message name="РасчитатьАномальныйСпросResponseMessage">
+		<part name="parameters"
+				element="tns:РасчитатьАномальныйСпросResponse"/>
+	</message>
+	<message name="ТоварыВПутиRequestMessage">
+		<part name="parameters"
+				element="tns:ТоварыВПути"/>
+	</message>
+	<message name="ТоварыВПутиResponseMessage">
+		<part name="parameters"
+				element="tns:ТоварыВПутиResponse"/>
+	</message>
+	<message name="УниверсальныйЗапросRequestMessage">
+		<part name="parameters"
+				element="tns:УниверсальныйЗапрос"/>
+	</message>
+	<message name="УниверсальныйЗапросResponseMessage">
+		<part name="parameters"
+				element="tns:УниверсальныйЗапросResponse"/>
+	</message>
+	<message name="РасширенныйЗапросRequestMessage">
+		<part name="parameters"
+				element="tns:РасширенныйЗапрос"/>
+	</message>
+	<message name="РасширенныйЗапросResponseMessage">
+		<part name="parameters"
+				element="tns:РасширенныйЗапросResponse"/>
+	</message>
+	<message name="ЦеныНоменклатурыПоГТДRequestMessage">
+		<part name="parameters"
+				element="tns:ЦеныНоменклатурыПоГТД"/>
+	</message>
+	<message name="ЦеныНоменклатурыПоГТДResponseMessage">
+		<part name="parameters"
+				element="tns:ЦеныНоменклатурыПоГТДResponse"/>
+	</message>
+	<message name="ЦеныНоменклатурыПоПериодамRequestMessage">
+		<part name="parameters"
+				element="tns:ЦеныНоменклатурыПоПериодам"/>
+	</message>
+	<message name="ЦеныНоменклатурыПоПериодамResponseMessage">
+		<part name="parameters"
+				element="tns:ЦеныНоменклатурыПоПериодамResponse"/>
+	</message>
+	<message name="ЗаписатьДанныеRequestMessage">
+		<part name="parameters"
+				element="tns:ЗаписатьДанные"/>
+	</message>
+	<message name="ЗаписатьДанныеResponseMessage">
+		<part name="parameters"
+				element="tns:ЗаписатьДанныеResponse"/>
+	</message>
+	<message name="QueryUniversalRequestMessage">
+		<part name="parameters"
+				element="tns:QueryUniversal"/>
+	</message>
+	<message name="QueryUniversalResponseMessage">
+		<part name="parameters"
+				element="tns:QueryUniversalResponse"/>
+	</message>
+	<portType name="InfoBasePortType">
+		<operation name="GetAmountGoods">
+			<input message="tns:GetAmountGoodsRequestMessage"/>
+			<output message="tns:GetAmountGoodsResponseMessage"/>
+		</operation>
+		<operation name="GetStructureInfo">
+			<input message="tns:GetStructureInfoRequestMessage"/>
+			<output message="tns:GetStructureInfoResponseMessage"/>
+		</operation>
+		<operation name="ДниОтсутствия">
+			<input message="tns:ДниОтсутствияRequestMessage"/>
+			<output message="tns:ДниОтсутствияResponseMessage"/>
+		</operation>
+		<operation name="ИнформационныеБазы">
+			<input message="tns:ИнформационныеБазыRequestMessage"/>
+			<output message="tns:ИнформационныеБазыResponseMessage"/>
+		</operation>
+		<operation name="НеВыполненныйСпрос">
+			<input message="tns:НеВыполненныйСпросRequestMessage"/>
+			<output message="tns:НеВыполненныйСпросResponseMessage"/>
+		</operation>
+		<operation name="Остатки">
+			<input message="tns:ОстаткиRequestMessage"/>
+			<output message="tns:ОстаткиResponseMessage"/>
+		</operation>
+		<operation name="ПолучитьКурсыВалют">
+			<input message="tns:ПолучитьКурсыВалютRequestMessage"/>
+			<output message="tns:ПолучитьКурсыВалютResponseMessage"/>
+		</operation>
+		<operation name="ПолучитьЦеныНоменклатуры">
+			<input message="tns:ПолучитьЦеныНоменклатурыRequestMessage"/>
+			<output message="tns:ПолучитьЦеныНоменклатурыResponseMessage"/>
+		</operation>
+		<operation name="Продажи">
+			<input message="tns:ПродажиRequestMessage"/>
+			<output message="tns:ПродажиResponseMessage"/>
+		</operation>
+		<operation name="РасчитатьАномальныйСпрос">
+			<input message="tns:РасчитатьАномальныйСпросRequestMessage"/>
+			<output message="tns:РасчитатьАномальныйСпросResponseMessage"/>
+		</operation>
+		<operation name="ТоварыВПути">
+			<input message="tns:ТоварыВПутиRequestMessage"/>
+			<output message="tns:ТоварыВПутиResponseMessage"/>
+		</operation>
+		<operation name="УниверсальныйЗапрос">
+			<input message="tns:УниверсальныйЗапросRequestMessage"/>
+			<output message="tns:УниверсальныйЗапросResponseMessage"/>
+		</operation>
+		<operation name="РасширенныйЗапрос">
+			<input message="tns:РасширенныйЗапросRequestMessage"/>
+			<output message="tns:РасширенныйЗапросResponseMessage"/>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоГТД">
+			<input message="tns:ЦеныНоменклатурыПоГТДRequestMessage"/>
+			<output message="tns:ЦеныНоменклатурыПоГТДResponseMessage"/>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоПериодам">
+			<input message="tns:ЦеныНоменклатурыПоПериодамRequestMessage"/>
+			<output message="tns:ЦеныНоменклатурыПоПериодамResponseMessage"/>
+		</operation>
+		<operation name="ЗаписатьДанные">
+			<input message="tns:ЗаписатьДанныеRequestMessage"/>
+			<output message="tns:ЗаписатьДанныеResponseMessage"/>
+		</operation>
+		<operation name="QueryUniversal">
+			<input message="tns:QueryUniversalRequestMessage"/>
+			<output message="tns:QueryUniversalResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="InfoBaseSoapBinding"
+			type="tns:InfoBasePortType">
+		<soapbind:binding style="document"
+				transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetAmountGoods">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:GetAmountGoods"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStructureInfo">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:GetStructureInfo"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ДниОтсутствия">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ДниОтсутствия"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ИнформационныеБазы">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ИнформационныеБазы"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="НеВыполненныйСпрос">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:НеВыполненныйСпрос"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Остатки">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:Остатки"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ПолучитьКурсыВалют">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ПолучитьКурсыВалют"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ПолучитьЦеныНоменклатуры">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ПолучитьЦеныНоменклатуры"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Продажи">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:Продажи"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="РасчитатьАномальныйСпрос">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:РасчитатьАномальныйСпрос"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ТоварыВПути">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ТоварыВПути"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="УниверсальныйЗапрос">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:УниверсальныйЗапрос"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="РасширенныйЗапрос">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:РасширенныйЗапрос"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоГТД">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЦеныНоменклатурыПоГТД"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоПериодам">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЦеныНоменклатурыПоПериодам"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЗаписатьДанные">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЗаписатьДанные"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="QueryUniversal">
+			<soapbind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:QueryUniversal"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="InfoBaseSoap12Binding"
+			type="tns:InfoBasePortType">
+		<soap12bind:binding style="document"
+				transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetAmountGoods">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:GetAmountGoods"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStructureInfo">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:GetStructureInfo"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ДниОтсутствия">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ДниОтсутствия"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ИнформационныеБазы">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ИнформационныеБазы"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="НеВыполненныйСпрос">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:НеВыполненныйСпрос"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Остатки">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:Остатки"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ПолучитьКурсыВалют">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ПолучитьКурсыВалют"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ПолучитьЦеныНоменклатуры">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ПолучитьЦеныНоменклатуры"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Продажи">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:Продажи"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="РасчитатьАномальныйСпрос">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:РасчитатьАномальныйСпрос"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ТоварыВПути">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ТоварыВПути"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="УниверсальныйЗапрос">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:УниверсальныйЗапрос"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="РасширенныйЗапрос">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:РасширенныйЗапрос"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоГТД">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЦеныНоменклатурыПоГТД"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЦеныНоменклатурыПоПериодам">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЦеныНоменклатурыПоПериодам"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ЗаписатьДанные">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:ЗаписатьДанные"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="QueryUniversal">
+			<soap12bind:operation style="document"
+					soapAction="http://80.249.178.90:8025/FIT-SPB/#InfoBase:QueryUniversal"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="InfoBase">
+		<port name="InfoBaseSoap"
+				binding="tns:InfoBaseSoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/"
+						conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="http://192.168.11.17/FIT-SPB/ws/InfoBase"/>
+		</port>
+		<port name="InfoBaseSoap12"
+				binding="tns:InfoBaseSoap12Binding">
+			<soap12bind:address location="http://192.168.11.17/FIT-SPB/ws/InfoBase"/>
+		</port>
+	</service>
+</definitions>

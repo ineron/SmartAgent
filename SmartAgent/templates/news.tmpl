@@ -1,0 +1,153 @@
+<% c++ #include "data/tmpl_news.h" %>
+<% skin defskin %>
+<% view News uses Data::News %>
+<% template header() %>
+<!-- Bread crumb is created dynamically -->
+<!-- row -->
+<div class="row">
+
+	<!-- col -->
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark">
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-puzzle-piece"></i> 
+				Новости 
+			<span>>  
+				Таймлайн
+			</span>
+		</h1>
+	</div>
+	<!-- end col -->
+
+<!-- right side of the page with the sparkline graphs -->
+	<!-- col -->
+	<% if (content.user_level == 2 )%>
+	<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+		<!-- sparks -->
+		<ul id="sparks">
+			<li class="sparks-info">
+				<h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+				<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+					1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+				</div>
+			</li>
+			<li class="sparks-info">
+				<h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+			<li class="sparks-info">
+				<h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+		</ul>
+		<!-- end sparks -->
+	</div>
+	<% end %>
+	<!-- end col -->
+
+</div>
+<!-- end row -->
+
+<!-- row -->
+<div class="row">
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+		<div class="well well-sm">
+			<!-- Timeline Content -->
+			<div class="smart-timeline">
+				<ul class="smart-timeline-list">
+					<li>
+						<div class="smart-timeline-icon">
+							<i class="fa fa-pencil"></i>
+						</div>
+						<div class="smart-timeline-time">
+							<small>1 Октября, 2014</small>
+						</div>
+						<div class="smart-timeline-content">
+							<p>
+								<a href="javascript:void(0);"><strong>Сообщения разработчиков системы ЛК</strong></a>
+							</p>
+							<p>
+								Начало разработки третей веосии личных кабинетов на основе новой платформы.
+							</p>
+						</div>
+					</li>
+					<li class="text-center">
+						<a href="javascript:void(0)" class="btn btn-sm btn-default"><i class="fa fa-arrow-down text-muted"></i> LOAD MORE</a>
+					</li>
+				</ul>
+			</div>
+			<!-- END Timeline Content -->
+
+		</div>
+
+	</div>
+
+</div>
+
+<!-- end row -->
+
+
+<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 */
+
+	// pagefunction
+	
+	var pagefunction = function() {
+		
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+
+	pagefunction();
+
+</script>
+<% end %>
+
+<% template render() %>
+    <% include header() %>
+<% end %>
+<% end view %>
+<% end skin %>

@@ -1,0 +1,55 @@
+{	
+   "app" : {
+      "root" : "",
+      "host" : "localhost:8080",
+      "locdomain" : "localhost",
+      "connection_string" : "postgresql:host='192.168.10.57';dbname='portal';user='postgres';password='TrO_15na'",
+      "soap": {
+        "user": "Ажминистратор",
+        "passwd": "5350626"
+      
+      }
+   },
+   "service" : {
+      "ip"  : "0.0.0.0",
+      "api" : "http",
+      "port" : 8080
+   },
+   "http" : {
+      "script" : "/sa.fcgi" ,
+      "rewrite" : [
+         { "regex" : "/media(/.+)", "pattern" : "$1" },
+         { "regex" : ".*" , "pattern" : "/sa.fcgi$0" }
+      ],
+   },
+   "views" : {
+      "default_skin" : "defskin" ,
+      "paths" : [ "./" ],
+      "skins" : [ "cpp_defskin" ],
+   },
+   "session" : {
+	"location" : "client",
+	"client" : {
+	    "hmac" : "sha1",
+	    "hmac_key" : "bcf2706f8efbe97dd892967a712b2579615d1356"
+	},
+   },
+    "security" : {
+         "multipart_form_data_limit" : 3000000,
+         "uploads_path": "media/upload"
+    },   
+    "file_server" : {
+	"enable" : true,
+	"listing" : true,
+	"document_root" : "media",
+	"alias" : [  
+	    { "url" : "/media" , "path" : "/Users/eilushin/Projects/SmartAgent/SmartAgent/deploy/media" },  
+	    { "url" : "/sound", "path": "/Users/eilushin/Projects/SmartAgent/SmartAgent/deploy/media/sound" },
+	]
+   },
+   "logging":{
+      "level":"debug",
+      "stderr":true
+   }
+
+}

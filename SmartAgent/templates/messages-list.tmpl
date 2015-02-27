@@ -1,0 +1,128 @@
+<% c++ #include "data/tmpl_messages.h" %>
+<% skin defskin %>
+<% view MessageList uses Data::Messages::MessageList  %>
+
+<% template messagelist(Data::Messages::MessageItem item) %>
+
+    <tr id=<%= item.messageRef %> <% if not item.isUnread  %>class="unread" <% end %>>
+	<!-- Check  -->
+	<td class="inbox-table-icon">
+	    <div class="checkbox">
+		<label>
+		    <input type="checkbox" class="checkbox style-2">
+		    <span></span>
+		</label>
+	    </div>
+	</td>
+	<!-- from  -->
+	<td class="inbox-data-from hidden-xs hidden-sm">
+	    <div>
+		<% if item.isWarning %>
+		<i class="fa fa-warning text-warning"></i>
+		<% end %>
+		    <%= item.senderName %>
+		<% if item.isDraft %>
+		<span class="text-danger">Чернвик</span>
+		<% end %>
+	    </div>
+	</td>
+	<!-- subject  -->
+	<td class="inbox-data-message">
+	    <div>
+		<span>
+		    <%= item.mark %>
+		    <!--<span class="label bg-color-orange">WORK</span>-->
+		    <%= item.subjectHeader %>
+		</span> 
+		<%= item.subject %>
+	    </div>
+	</td>
+	<!-- attachments  -->
+	<td class="inbox-data-attachment hidden-xs">
+	    <div>
+		<% if item.isAttachment %>
+		<a href="javascript:void(0);" rel="tooltip" data-placement="left" data-original-title="Файлы: <%= item.attachmentList %>" class="txt-color-darken"><i class="fa fa-paperclip fa-lg"></i></a>
+		<% end %>
+	    </div>
+	</td>
+	<!-- date  -->
+	<td class="inbox-data-date hidden-xs">
+	    <div><%= item.messageDate %></div>
+	</td>
+    </tr>
+
+<% end template%>
+
+
+<% template header() %>
+<table id="inbox-table" class="table table-striped table-hover">
+    <tbody>
+	<% foreach item in messageItemList %>
+	<% item %>
+	<% include messagelist(item) %>
+	<% end %>
+	<% end %>
+    </tbody>
+</table>
+
+<script>
+	
+	//Gets tooltips activated
+	$("#inbox-table [rel=tooltip]").tooltip();
+
+	$("#inbox-table input[type='checkbox']").change(function() {
+		$(this).closest('tr').toggleClass("highlight", this.checked);
+	});
+
+	$("#inbox-table .inbox-data-message").click(function() {
+		$this = $(this);
+		getMail($this);
+	})
+	$("#inbox-table .inbox-data-from").click(function() {
+		$this = $(this);
+		getMail($this);
+	})
+	function getMail($this) {
+		//console.log($this.closest("tr").attr("id"));
+		loadURL("messages/read?message="+$this.closest("tr").attr("id"), $('#inbox-content > .table-wrap'));
+	}
+
+
+	$('.inbox-table-icon input:checkbox').click(function() {
+		enableDeleteButton();
+	})
+
+	$(".deletebutton").click(function() {
+		$('#inbox-table td input:checkbox:checked').parents("tr").rowslide();
+		//$(".inbox-checkbox-triggered").removeClass('visible');
+		//$("#compose-mail").show();
+	});
+
+	function enableDeleteButton() {
+		var isChecked = $('.inbox-table-icon input:checkbox').is(':checked');
+
+		if (isChecked) {
+			$(".inbox-checkbox-triggered").addClass('visible');
+			//$("#compose-mail").hide();
+		} else {
+			$(".inbox-checkbox-triggered").removeClass('visible');
+			//$("#compose-mail").show();
+		}
+	}
+	$( document ).ready(function() {
+	    SetCheckedState(false);
+	});
+	
+	//SetCheckedState(true);
+	
+</script>
+
+<% end %>
+
+<% template render() %>
+
+    <% include header() %>
+
+<% end template %>
+<% end view %>
+<% end skin %>

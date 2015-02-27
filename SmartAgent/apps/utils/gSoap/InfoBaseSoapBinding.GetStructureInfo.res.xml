@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+ xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns2="http://v8.1c.ru/8.1/data/core"
+ xmlns:ns1="http://80.249.178.90:8025/FIT-SPB/">
+ <SOAP-ENV:Body>
+  <ns1:GetStructureInfoResponse>
+   <ns1:return>
+    <ns1:StorageTableName></ns1:StorageTableName>
+    <ns1:StorageFieldName></ns1:StorageFieldName>
+    <ns1:FieldName></ns1:FieldName>
+    <ns1:Metadata></ns1:Metadata>
+   </ns1:return>
+  </ns1:GetStructureInfoResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
