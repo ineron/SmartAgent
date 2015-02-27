@@ -1,0 +1,520 @@
+<% c++ #include "data/tmpl_catalog.h" %>
+<% skin defskin %>
+<% view Catalog uses Data::Catalog  %>
+
+
+
+<% template catalog_row(Data::CatalogItem item)%>
+<tr class="">
+    <td style="border-top: white; background: white; height: 20px;"></td>
+    <td class=""><div class="table-f1 catalog-cell"><span"><%= item.code %></span></div></td>
+    <td title="<%= item.articul %>" class="catalog-cell "><div"><span><%= item.articul %></span></div></td>
+    <td ><div class="catalog-cell"><span><%= item.brief | raw %></span></div></td>
+    <td rel="tooltip" data-placement="top" data-original-title="<%= item.pack %>"><div><span"><%= item.pack %></span></div></td>
+    <td title="<%= item.price %>" ><span><%= item.price %></span></td>
+    <% if is_signed %>
+    <td class="col-md-2"><div>
+    <input type="text" class="input-cell" id="sp-<%= item.ref %>"  name="<%= item.ref %>" type="text" size="4" value="0">
+    <!--<input class="form-control spinner spinner-both" id=sp-"<%= item.ref %>"  name="<%= item.ref %>" type="text" size="4" value="0">-->
+    </div>
+    </td>
+    <td></td>
+    <% end %>
+</tr>
+<% end template %>
+
+
+<% template catalog_group(Data::CatalogItem item)%>
+<tr class="">
+    <% if item.is_hidden %>
+	<td style="background: white;">
+	    <div class="fit-img">
+		<a class="highslide" href="media/img/fullsize//<%= catalogImagePath %>/<%= item.file %>" onclick="return hs.expand(this);">
+    		    <img src="media/img/catalog/<%= catalogImagePath %>/<%= item.file %> ">
+    		</a>
+	    </div>
+	</td>
+	<td class="" colspan="7">
+		<div class="comment">
+		    <%= item.description | raw %>
+		</div>
+	</td>
+    <% else %>
+	<td class="table-f1" colspan="8"><span><strong><%= item.name %></strong></span></td>
+    <% end %>
+</tr>
+<% end template %>
+
+
+<% template catalog_widget(Data::CatalogPage items ) %>
+    <div class="widget-body no-padding col-sm-<%= colSize %> col-md-<%= colSize %> col-lg-<%= colSize %>">
+	    <fieldset>
+		<div class="form-group" style="width:100%; ">
+		    <table class="table table-striped table-bordered table-hover dataTable no-footer">
+		    <thead>
+			<th></th>
+			<th>Код</th>
+			<th>Доп.<br/>инфо</th>
+			<th>Описание<br/> товара</th>
+			<th style="width:8%">Упаковка/ Коробка</th>
+			<th>Цена</th>
+			<% if is_signed %>
+			<th>Кол-во</th>
+			<th>Посл.<br/>заказ</th>
+			<% end %>
+		    </thead>
+			<tbody>
+			<% foreach item in items %>
+			    <% item %>
+				<% if item.is_group %>
+				    <% include catalog_group(item) %>
+				<% elif item.emptySlot %>
+				    <tr class="">
+					<td class="table-f1" colspan="8"><span></span></td>
+				    </tr>
+				<% else %>
+				    <% include catalog_row(item) %>
+				<% end %>
+			    <% end %>
+		        <% end %>
+		        
+		        </tbody>
+		    </table>
+		</div>
+	    </fieldset>
+    </div>
+<% end template %>
+
+<% template tables() %>
+    
+
+	<% foreach item in catalog %>
+	<% item %>
+	    <% include catalog_widget(item) %>
+	<% end %>
+	<% end %>
+<script type="text/javascript">
+
+    $(".comment").shorten({    });
+    $(".comment-small").shorten({showChars: 10});
+
+
+    //var bread_crumb = $('#ribbon ol.breadcrumb');
+    //var navLen = $('nav li.active > a').length;
+    //console.log("<%= paragraph %>");
+    //bread_crumb[navLen].remove();
+    //bread_crumb.append($("<li></li>").html("<%= paragraph %>"));
+</script>
+
+
+<% end template %>
+
+
+<% template header() %>
+<section id="widget-grid" class="">
+
+
+<div class="row">
+    <div class="jarviswidget jarviswidget-color-blueDark">
+    <!--
+	<header>
+	    <h2><%= paragraph %></h2>
+	</header>
+	-->
+	<div role="content">
+	<!-- widget edit box -->
+	<div class="jarviswidget-editbox">
+		<!-- This area used as dropdown edit box -->
+	</div>
+	<!-- end widget edit box -->
+	<form id="dt_catalog">
+	    <div id="dt_basic_wrapper" style="width: 100% class="dataTables_wrapper form-inline no-footer"></div>
+	</form>
+	<div class="dt-toolbar-footer"  ">
+	    <div class="col-sm-6 col-xs-12 hidden-xs">
+	        <div class="dataTables_info" id="dt_catalog_info" role="status" aria-live="polite"></div>
+	    </div>
+		<div id="paginator" class="col-xs-12 col-sm-6">	</div>
+	</div>	    
+    </div>
+</div>
+</section>
+
+<script type="text/javascript">
+
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+    pageSetUp();
+
+
+    
+    /*
+     * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+     * eg alert("my home function");
+     * 
+     * var pagefunction = function() {
+     *   ...
+     * }
+     * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+     * 
+     */
+    
+    // PAGE RELATED SCRIPTS
+    
+    // pagefunction	
+    var pagefunction = function() {
+	console.log("pageFunction");
+	
+	var config ={
+	    page: 1,
+	    oldPage: 0,
+	    witgets: 0,
+	    rows: 1,
+	    mode: 1,
+	    brand: $(".breadcrumb li").last().text(),
+	    items: <%= itemCount %>,
+            catalog: { add: function(name, val) {this[name] = val; }}
+            /*JSON.parse(localStorage[$('meta[name=useref]').attr("rel")])*/
+	};
+	/* // DOM Position key index //
+	
+	    l - Length changing (dropdown)
+	    f - Filtering input (search)
+	    t - The Table! (datatable)
+	    i - Information (records)
+	    p - Pagination (paging)
+	    r - pRocessing 
+	    < and > - div elements
+	    <"#id" and > - div with an id
+	    <"class" and > - div with a class
+	    <"#id.class" and > - div with an id and class
+	    
+	    Also see: http://legacy.datatables.net/usage/features
+	*/
+	
+
+	var catalogdata = localStorage.getItem($('meta[name=useref]').attr("rel"));
+        if(!catalogdata)
+	{
+	    localStorage.setItem($('meta[name=useref]').attr("rel"), JSON.stringify(config.catalog));
+	    
+	}else{
+	    var jsdata = JSON.parse(catalogdata);
+	    $.each(jsdata,function(key,value)
+	    {
+		config.catalog.add(key,value);
+	    });
+	};
+	console.log("!!!",config.catalog);
+
+	
+	
+	var loadPage = function(){
+		$.ajax({
+	            data: {
+		            'start': config.rows*config.widgets*(config.page-1),
+		            'column': config.widgets,
+		            'length': config.rows*config.widgets,
+		            'brand': '<%= catalogImagePath %>',
+		            //'brand': $(".breadcrumb li").last().text(),
+		            'mode': config.mode,
+	            },
+	            url: "catalog-data",
+	            success: function(data){
+	        	/*
+	        	$("#dt_basic_wrapper").fadeOut( 200, function(){
+	        	    $("#dt_basic_wrapper").html(data);
+	        	});
+	        	$("#dt_basic_wrapper").fadeIn( 300 );
+			*/
+        		$("#dt_basic_wrapper").html(data);
+			/*
+			$(".spinner").spinner({
+			    min:0,
+			    max:999,
+			    height:22
+			});
+			*/
+			var fields = $(".input-cell").serializeArray();
+			//console.log(fields);
+			$.each( fields, function( i, field ) {
+			    if(config.catalog[field.name])
+			    {
+    				$("#sp-"+field.name).val(config.catalog[field.name]);
+    				//console.log($("#sp-"+field.name));
+    			    }
+			});
+			var elemcount = Object.keys(config.catalog).length-1;
+			if(elemcount)
+			{
+			    $("#shopcart").append("<b id=\"shopcartbadge\"class=\"badge bg-color-red bounceIn animated\">"+elemcount+"</b>");
+			}
+			
+			
+			$(".input-cell").blur(function(){
+			    //console.log(catalogdata);
+			    //catalogdata = JSON.parse(localStorage[$('meta[name=useref]').attr("rel")]);
+			    //console.log(data.catalog);
+			    
+			    //console.log("blur ",this.id,this.value,window.location);
+			    //
+			    //.split("/")[2]
+			    /*$.cookie(this.name,this.value,{
+				expires : 365,
+				path : "/",//window.location.hash,
+				domain : window.location.hostname
+			    });
+			    */
+			    if(this.value != "0")
+			    {
+				config.catalog.add(this.name,this.value);
+				localStorage.setItem($('meta[name=useref]').attr("rel"), JSON.stringify(config.catalog));
+				//console.log("!!!",Object.keys(config.catalog).length);
+				var elemcount = Object.keys(config.catalog).length-1;
+				if($("#shopcart").length == 3)
+				    $("#shopcart :last").remove();
+				$("#shopcart").append("<b id=\"shopcartbadge\"class=\"badge bg-color-red bounceIn animated\">"+elemcount+"</b>");
+			    }
+			    
+			});
+			console.log("bade - ",$("#shopcart b.badge"));
+            	    }
+		});
+	};
+	
+	var onResize = function(){
+	    var needUpdate = false;
+	    if($("#content").width() > 2470 ){
+		if(config.widgets != 4)
+		{
+		    config.widgets = 4;
+		    needUpdate=true;
+		}
+	    
+	    }else if($("#content").width() > 1814){
+		if(config.widgets != 3)
+		{
+		    config.widgets = 3;
+		    needUpdate=true;
+		}
+	    
+	    }else if($("#content").width() > 1221){
+		if(config.widgets != 2)
+		{
+		    config.widgets = 2;
+		    needUpdate=true;
+		}
+	    
+	    }else{
+		if(config.widgets != 1)
+		{
+		    config.widgets = 1;
+		    needUpdate=true;
+		}
+	    
+	    }
+		console.log("WIDTH..",$("#content").width());
+	    
+	    var contenHeight = $(window).outerHeight()-$("#ribbon").outerHeight()-$("#fotter").outerHeight()-$("#header").outerHeight()-160;
+	    var rowHeight = 45;
+		console.log("ROWS..",config.rows);
+		console.log("HEIGHT..",$(window).outerHeight());
+	    
+	    if((contenHeight/rowHeight)^0 !=  config.rows){
+		
+		config.rows = (contenHeight/rowHeight)^0;
+		console.log("ROWS..",config.rows);
+		console.log("HEIGHT..",$(window).outerHeight());
+		needUpdate=true;
+	    }
+	    
+	    if(config.oldPage != config.page)
+	    {
+		config.oldPage = config.page;
+		needUpdate=true;
+	    }
+	    	    
+	    if(needUpdate)
+	    {
+		loadPage();
+		needUpdate=false;
+	    }
+	
+	};
+	
+	onResize();
+
+
+	    /*
+	    $(window).endlessScroll({
+		inflowPixels:10,
+		fireDelay:500,
+		fireOnce:true,
+		ceaseFireOnEmpty:false,
+		callback: function(i,p,d){
+		    var page = 1;
+		    if(0>p){
+			page = -1;}
+		    if(config.page+page>0){
+			config.page=config.page+page;}
+		    //$('#paginator').bootpag({total: 150,page:config.page, maxVisible: 7});
+	    
+		    $("#dt_catalog_info").html(function(){
+			var page = (((config.page-1)/7)^0)*7; 
+			return "Показаны с <span class=\"txt-color-darken\">"+(page+1)+"</span> по <span class=\"txt-color-darken\">"+(page+7)+"</span> из <span class=\"text-primary\">"+(config.items/config.rows^0)+"</span> имеющихся"
+		    });
+		    console.log("page...",i,page,d);
+		    loadPage();
+		}
+	    });
+	    */
+	    /*
+	    $(window).scroll(function () { 
+	        if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+	    	    //Add something at the end of the page
+	    	    console.log("scroll..");
+	        }
+
+
+	    });
+	    */
+
+	
+        $(window).resize(function() {
+	    //console.log("resize",$("#content").height());
+	    //onResize();
+	    //console.log("height ",$('#panel_1').geight());
+	    //console.log("WIDTH..",$("#content").width());
+
+        });
+
+    
+	$('#paginator').bootpag({
+	    total: config.items/config.rows^0,          // total pages
+	    page: 1,            // default page
+	    maxVisible: 7,     // visible pagination
+	    leaps: true         // next/prev leaps through maxVisible
+	}).on("page", function(event, num){
+	    //$("#dt_basic_wrapper").html("Page " + num); // or some ajax content loading...
+	    // ... after content load -> change total to 10
+	    $(this).bootpag({total: config.items/config.rows^0, maxVisible: 7});
+	    config.page=num;
+
+	    $("#dt_catalog_info").html(function(){
+		    var page = (((config.page-1)/7)^0)*7; 
+		    return "Показаны с <span class=\"txt-color-darken\">"+(page+1)+"</span> по <span class=\"txt-color-darken\">"+(page+7)+"</span> из <span class=\"text-primary\">"+(config.items/config.rows^0)+"</span> имеющихся"
+		});
+	    onResize();
+	});
+    
+    
+    
+    };
+    // END PAGE FUNCTION
+
+
+    var pagedestroy = function(){
+	$(".spinner").spinner("destroy");
+    };
+
+    // load related plugins
+/*    
+    loadScript("media/js/plugin/jquery-bootpag/jquery.bootpag.min.js",function(){
+    
+	    console.log("load paginator");
+	    $('#paginator').bootpag({
+		total: 150,          // total pages
+		page: 1,            // default page
+		maxVisible: 7,     // visible pagination
+		leaps: true         // next/prev leaps through maxVisible
+	    }).on("page", function(event, num){
+		//$("#dt_basic_wrapper").html("Page " + num); // or some ajax content loading...
+		// ... after content load -> change total to 10
+		$(this).bootpag({total: 150, maxVisible: 7});
+		config.page=num;
+		loadPage();
+	    });
+    });
+*/
+
+    loadScript("media/js/highslide/highslide.packed.js",function(){
+	hs.graphicsDir = "media/js/highslide/graphics/";
+                  hs.outlineType = null;
+                  hs.showCredits = false;
+                  hs.lang= {cssDirection:"ltr",loadingText:"Загрузка...",loadingTitle:"Кликните чтобы отменить",focusTitle:"Нажмите чтобы перенести вперёд",fullExpandTitle:"Увеличить",fullExpandText:"Полноэкранный",previousText:"Предыдущий",previousTitle:"Назад (стрелка влево)",nextText:"Далее",nextTitle:"Далее (стрелка вправо)",moveTitle:"Передвинуть",moveText:"Передвинуть",closeText:"Закрыть",closeTitle:"Закрыть (Esc)",resizeTitle:"Восстановить размер",playText:"Слайд-шоу",playTitle:"Слайд-шоу (пробел)",pauseText:"Пауза",pauseTitle:"Приостановить слайд-шоу (пробел)",number:"Изображение %1/%2",restoreTitle:"Нажмите чтобы посмотреть картинку, используйте мышь для перетаскивания. Используйте клавиши вперёд и назад"};
+    
+    });
+
+    loadScript("media/js/plugin/datatables/jquery.dataTables.min.js", function(){
+	loadScript("media/js/plugin/datatables/dataTables.colVis.min.js", function(){
+	    loadScript("media/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+		loadScript("media/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+		    loadScript("media/js/plugin/jquery-bootpag/jquery.bootpag.min.js", function(){
+			loadScript("media/js/plugin/jquery-endless-scroll/jquery.endless-scroll.js", function(){
+			    loadScript("media/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+			});
+		    });
+		});
+	    });
+	});
+    });
+
+	//loadScript("media/js/plugin/jquery-endless-scroll/jquery.endless-scroll.js", function(){
+	    //loadScript("media/js/plugin/jquery-bootpag/jquery.bootpag.min.js",pagefunction)
+	    //{
+		//loadScript("media/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+	    //});
+	//});
+
+    //loadScript("media/js/plugin/jquery-shorten/jquery.shorten.js", function(){});
+
+
+
+</script>
+
+
+
+<% end template %>
+
+<% template render() %>
+    <% if header %>
+	<% include header() %>
+    <% else %>
+	<% include tables() %>
+    <% end %>
+
+
+
+
+<% end template %>
+
+<% end view %>
+<% end skin %>

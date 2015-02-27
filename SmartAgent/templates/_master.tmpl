@@ -1,0 +1,647 @@
+<% c++ #include "data/tmpl_master.h" %>
+<% skin defskin %>
+<% view Master uses Data::Master %>
+
+<% template main_header() %>
+    <meta charset="utf-8" />
+    <title><%= page.title %></title>
+    <meta name="keywords" content="<%= page.keywords %>" />
+    <meta name="description" content="<%= page.description %>" />
+    <meta name="useref"  rel="<%= user_ref  %>">
+    <meta name="usercode" rel="<%= user_code  %>">
+
+
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/font-awesome.min.css">
+
+    <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/smartadmin-skins.min.css">
+
+    <!-- SmartAdmin RTL Support is under construction-->
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/smartadmin-rtl.min.css">
+
+    <!-- We recommend you use "your_style.css" to override SmartAdmin
+         specific styles this will also ensure you retrain your customization with each SmartAdmin update.-->
+    <link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>media/css/fit_style.css">
+
+    <!--additional css-->
+    <link rel="stylesheet" type="text/css" media="screen"  href="<%=assetsUrl %>media/js/highslide/highslide.css">
+
+    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="<%=assetsUrl %>/media/css/demo.min.css">-->
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="<%=assetsUrl %>media/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<%=assetsUrl %>media/img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- GOOGLE FONT -->
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">-->
+
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="<%=assetsUrl %>media/img/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="<%=assetsUrl %>media/img/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="<%=assetsUrl %>media/img/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%=assetsUrl %>media/img/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="<%=assetsUrl %>media/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="<%=assetsUrl %>media/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="<%=assetsUrl %>media/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
+<% end %>
+
+<% template scripts() %>
+    <!--================================================== -->
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="<%= assetsUrl %>media/js/plugin/pace/pace.min.js"></script>-->
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>-->
+    <script>
+        if (!window.jQuery) {
+	document.write('<script src="<%= assetsUrl %>media/js/libs/jquery-2.1.1.min.js"><\/script>');
+        }
+    </script>
+
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
+    <script>
+        if (!window.jQuery.ui) {
+	document.write('<script src="<%= assetsUrl %>media/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="<%= assetsUrl %>media/js/app.config.js"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
+    <script src="<%= assetsUrl %>media/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+
+    <!-- BOOTSTRAP JS -->
+    <script src="<%= assetsUrl %>media/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM NOTIFICATION -->
+    <script src="<%= assetsUrl %>media/js/notification/SmartNotification.min.js"></script>
+
+    <!-- JARVIS WIDGETS -->
+    <script src="<%= assetsUrl %>media/js/smartwidgets/jarvis.widget.min.js"></script>
+
+    <!-- EASY PIE CHARTS -->
+    <script src="<%= assetsUrl %>media/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+
+    <!-- SPARKLINES -->
+    <script src="<%= assetsUrl %>media/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="<%= assetsUrl %>media/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="<%= assetsUrl %>media/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+    <!-- JQUERY SELECT2 INPUT -->
+    <script src="<%= assetsUrl %>media/js/plugin/select2/select2.min.js"></script>
+
+    <!-- JQUERY UI + Bootstrap Slider -->
+    <script src="<%= assetsUrl %>media/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+
+    <!-- browser msie issue fix -->
+    <script src="<%= assetsUrl %>media/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+
+    <!-- FastClick: For mobile devices -->
+    <script src="<%= assetsUrl %>media/js/plugin/fastclick/fastclick.min.js"></script>
+
+    <!-- SlimScroll: For fixed navigation scrolling -->
+    <script src="<%= assetsUrl %>media/js/plugin/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="<%= assetsUrl %>media/js/plugin/jquery-shorten/jquery.shorten.js"></script>
+
+    <script src="<%= assetsUrl %>media/js/plugin/jquery-cookie/jquery.cookie.js"></script>
+
+    <script src="<%= assetsUrl %>media/js/plugin/jquery-serializejson/jquery.serializejson.min.js"></script>
+
+    <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    <!-- Demo purpose only -->
+    <!--<script src="<%= assetsUrl %>media/js/demo.min.js"></script>-->
+
+    <!-- MAIN APP JS FILE -->
+    <script src="<%= assetsUrl %>media/js/app.js"></script>		
+
+    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
+    <!-- Voice command : plugin -->
+    <script src="<%= assetsUrl %>media/js/speech/voicecommand.min.js"></script>
+    
+
+    <!--fixed-navigation fixed-header fixed-ribbon fixed-footer-->
+
+<% end %>
+
+<% template user_info() %>
+	    <!-- User info -->
+	    <div class="login-info">
+		<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
+		    
+		    <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+			<img src="<%= assetsUrl %>media/img/avatars/male.png" alt="me" class="online" /> 
+			<span>
+			    <%= page.userName %>
+			</span>
+			<i class="fa fa-angle-down"></i>
+		    </a> 
+		    
+		</span>
+	    </div>
+	    <!-- end user info -->
+
+<% end template %>
+
+
+<% template short_cat() %>
+	<!-- #SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+	     Note: These tiles are completely responsive, you can add as many as you like -->
+	    <ul>
+		<li>
+		    <a href="#messages" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Сообщения <span id="newmessages" class="label pull-right bg-color-darken"><%= newMsgCount %></span></span> </span> </a>
+		</li>
+		<li>
+		    <a href="#calendar" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Календарь</span> </span> </a>
+		</li>
+		<li>
+		    <a href="#service" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-cog fa-4x"></i> <span>Сервис</span> </span> </a>
+		</li>
+		<li>
+		    <a href="#doc/invoice" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Заказы <span class="label pull-right bg-color-darken"></span></span> </span> </a>
+		</li>
+		<li>
+		    <a href="#profile" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>Мой профиль </span> </span> </a>
+		</li>
+	    </ul>
+	<!-- END SHORTCUT AREA -->
+
+<% end template%>
+
+<% template nav() %>
+    <% foreach menuItem in menuList %>
+    <ul>
+    <% item %>
+	<% if not empty menuItem.menu %>
+	<li>
+	    <a href="<%= menuItem.url %>"  title="<%= menuItem.title%>" >
+		<i class="<%= menuItem.icon%>"></i>
+		<span class="<%= menuItem.style %>"><%= menuItem.title %></span>
+		<% if not empty menuItem.badge %>
+		<span class="badge pull-right inbox-badge"><%= menuItem.badge %></span>
+		<% end %>
+	    </a>
+	    <% foreach subItem in menuItem.menu %>
+	    <ul>
+	    <% item %>
+		<li>
+		    <a href="<%= subItem.url %>"  title="<%= subItem.title%>" >
+		        <i class="<%= subItem.icon%>"></i>
+			<span class="<%= subItem.style %>"><%= subItem.title %></span>
+			<% if not empty subItem.badge %>
+			<span class="badge pull-right inbox-badge"><%= subItem.badge %></span>
+			<% end %>
+		    </a>
+		</li>
+	    <% end %>
+	    </ul>
+	</li>
+	<% end %>
+	<% else %>
+    	<li>
+    	    <a href="<%= menuItem.url %>"  title="<%= menuItem.title%>" >
+    		<i class="<%= menuItem.icon%>"></i>
+    		<span class="<%= menuItem.style %>"><%= menuItem.title %></span>
+		<% if not empty menuItem.badge %>
+		<span class="badge pull-right inbox-badge"><%= menuItem.badge %></span>
+		<% end %>
+    	    </a>
+    	</li>
+    	<% end %>
+    <% end %>
+    </ul>
+    <% end %>
+    <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+<% end template %>
+
+<% template projects() %>
+		<span class="label">Projects:</span>
+		<span class="project-selector dropdown-toggle" data-toggle="dropdown">Recent projects <i class="fa fa-angle-down"></i></span>
+
+		<!-- Suggestion: populate this list with fetch and push technique -->
+		<ul class="dropdown-menu">
+		    <li>
+			<a href="javascript:void(0);">Online e-merchant management system - attaching integration with the iOS</a>
+		    </li>
+		    <li>
+			<a href="javascript:void(0);">Notes on pipeline upgradee</a>
+		    </li>
+		    <li>
+			<a href="javascript:void(0);">Assesment Report for merchant account</a>
+		    </li>
+		    <li class="divider"></li>
+		    <li>
+			<a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a>
+		    </li>
+		</ul>
+		<!-- end dropdown-menu-->
+
+<% end template%>
+
+<% template page_header()%>
+	<!-- #HEADER -->
+	    <div id="logo-group">
+
+		<!-- PLACE YOUR LOGO HERE -->
+		<span id="logo"> <img src="<%= assetsUrl %>media/img/logo.png" alt="SmartAdmin"> </span>
+		<!-- END LOGO PLACEHOLDER -->
+
+		<!-- Note: The activity badge color changes when clicked and resets the number to 0
+		     Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+		<% if page.is_signed %>
+		<span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+
+		<!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+		<div class="ajax-dropdown">
+
+		    <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+		    <div class="btn-group btn-group-justified" data-toggle="buttons">
+			<label class="btn btn-default">
+			    <input type="radio" name="activity" id="notify/messages">
+			    Msgs (14) </label>
+			<label class="btn btn-default">
+			    <input type="radio" name="activity" id="notify/notifications">
+			    notify (3) </label>
+			<label class="btn btn-default">
+			    <input type="radio" name="activity" id="notify/tasks">
+			    Tasks (4) </label>
+		    </div>
+
+		    <!-- notification content -->
+		    <div class="ajax-notifications custom-scroll">
+
+			<div class="alert alert-transparent">
+			    <h4>Click a button to show messages here</h4>
+			    This blank page message helps protect your privacy, or you can show the first message here automatically.
+			</div>
+
+			<i class="fa fa-lock fa-4x fa-border"></i>
+
+		    </div>
+		    <% end %>
+		    <!-- end notification content -->
+
+		    <!-- footer: refresh area -->
+		    <!--<span> Last updated on: 12/12/2013 9:43AM
+			<button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
+			    <i class="fa fa-refresh"></i>
+			</button> 
+		    </span>-->
+		    <!-- end footer -->
+
+		</div>
+		<!-- END AJAX-DROPDOWN -->
+	    </div>
+
+	    <!-- #PROJECTS: projects dropdown -->
+	    <div class="project-context hidden-xs">
+		<!--< include projects() >-->
+	    </div>
+	    <!-- end projects dropdown -->
+	    
+	    <!-- #TOGGLE LAYOUT BUTTONS -->
+	    <!-- pulled right: nav area -->
+	    <div class="pull-right">
+		
+		<!-- collapse menu button -->
+		<div id="hide-menu" class="btn-header pull-right">
+		    <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+		</div>
+		<!-- end collapse menu -->
+		
+		<!-- #MOBILE -->
+		<!-- Top menu profile link : this shows only when top menu is active -->
+		<ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+		    <li class="">
+			<a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
+			    <img src="<%= assetsUrl %>media/img/avatars/sunny.png" alt="John Doe" class="online" />  
+			</a>
+			<ul class="dropdown-menu pull-right">
+			    <li>
+				<a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Настройки</a>
+			    </li>
+			    <li class="divider"></li>
+			    <li>
+				<a href="#profile" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-user"></i> <u>П</u>рофиль</a>
+			    </li>
+			    <li class="divider"></li>
+			    <li>
+				<a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>С</u>носки</a>
+			    </li>
+			    <li class="divider"></li>
+			    <li>
+				<a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Полный <u>Э</u>кран</a>
+			    </li>
+			    <li class="divider"></li>
+			    <li>
+				<a href="#shopcart" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-shopping-cart"></i> К <u>о</u>рзина</a>
+			    </li>
+			    <li class="divider"></li>
+			    <li>
+				<% if page.is_signed %>
+				<a href="logout" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout">
+				    <i class="fa fa-sign-out fa-lg"></i> 
+				    <strong><u>В</u>ыйти</strong>
+				</a>
+				<% else %>
+				<a href="login" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogin">
+				    <i class="fa fa-sign-in fa-lg"></i> <strong><u>В</u>ыйти</strong>
+				</a>
+				<% end %>
+				<div class="modal fade" id="remoteModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+					<div class="modal-content"></div>
+				    </div>
+				</div>	    
+			    </li>
+			</ul>
+		    </li>
+		</ul>
+
+		<!-- logout button -->
+		<div id="login" class="btn-header transparent pull-right">
+		    <!--<span> <a href="ajax/logout" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>-->
+		    <span> 
+			<% if page.is_signed %>
+			<a href="logout" title="Выйти" data-action="userLogout" data-logout-msg="Вы можете улучшить безопастность Ваших данных после выхода, закрыв свой браузер" >
+			    <i class="fa fa-sign-out"></i>
+			</a> 
+			<% else %>
+			<a href="login" title="Войти"  data-toggle="modal" data-target="#signinModal" >
+			    <i class="fa fa-sign-in"></i>
+			</a> 
+			<% end %>
+		    </span>
+		</div>
+		<!-- end logout button -->
+
+		<!-- search mobile button (this is hidden till mobile view port) -->
+		<div id="search-mobile" class="btn-header transparent pull-right">
+		    <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+		</div>
+		<!-- end search mobile button -->
+		
+		<!-- #SEARCH -->
+		<!-- input: search field -->
+		<form action="#search" class="header-search pull-right">
+		    <input id="search-fld" type="text" name="param" placeholder="Find reports and more">
+		    <button type="submit">
+			<i class="fa fa-search"></i>
+		    </button>
+		    <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+		</form>
+		<!-- end input: search field -->
+		<!-- shop cart-->
+		<div id="shopcart" class="btn-header transparent pull-right">
+		    <span> <a href="#shopcart" title="Корзина"><i class="fa  fa-shopping-cart"></i></a>
+		    </span>
+		</div>
+		    <!--<b id="shopcartbadge"class="badge bg-color-red bounceIn animated"></b> -->
+		
+		<!-- end shop cart-->
+		<!-- fullscreen button -->
+		<div id="fullscreen" class="btn-header transparent pull-right">
+		    <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+		</div>
+		<!-- end fullscreen button -->
+
+		<!-- #Voice Command: Start Speech -->
+		<div id="speech-btn" class="btn-header transparent pull-right hidden-sm hidden-xs">
+		    <div> 
+			<a href="javascript:void(0)" title="Voice Command" data-action="voiceCommand"><i class="fa fa-microphone"></i></a> 
+			<div class="popover bottom"><div class="arrow"></div>
+			    <div class="popover-content">
+				<h4 class="vc-title">Voice command activated <br><small>Please speak clearly into the mic</small></h4>
+				<h4 class="vc-title-error text-center">
+				    <i class="fa fa-microphone-slash"></i> Voice command failed
+				    <br><small class="txt-color-red">Must <strong>"Allow"</strong> Microphone</small>
+				    <br><small class="txt-color-red">Must have <strong>Internet Connection</strong></small>
+				</h4>
+				<a href="javascript:void(0);" class="btn btn-success" onclick="commands.help()">See Commands</a> 
+				<a href="javascript:void(0);" class="btn bg-color-purple txt-color-white" onclick="$('#speech-btn .popover').fadeOut(50);">Close Popup</a> 
+			    </div>
+			</div>
+		    </div>
+		</div>
+		<!-- end voice command -->
+
+		<!-- multiple lang dropdown : find all flags in the flags page -->
+		<ul class="header-dropdown-list hidden-xs">
+			<!--
+			<li>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-us" alt="United States"> <span> US</span> <i class="fa fa-angle-down"></i> </a>
+			<ul class="dropdown-menu pull-right">
+			    <li class="active">
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-fr" alt="France"> Français</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-es" alt="Spanish"> Español</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-de" alt="German"> Deutsch</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-jp" alt="Japan"> 日本語</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-cn" alt="China"> 中文</a>
+			    </li>	
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-it" alt="Italy"> Italiano</a>
+			    </li>	
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-pt" alt="Portugal"> Portugal</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-ru" alt="Russia"> Русский язык</a>
+			    </li>
+			    <li>
+				<a href="javascript:void(0);"><img src="<%= assetsUrl %>media/img/blank.gif" class="flag flag-kp" alt="Korea"> 한국어</a>
+			    </li>						
+			    
+			</ul>
+		    </li>-->
+		</ul>
+		<!-- end multiple lang -->
+
+	    </div>
+	    <!-- end pulled right: nav area -->
+
+	<!-- END HEADER -->
+
+<% end template %>
+
+<% template ribbon() %>
+	    <!-- RIBBON -->
+	    <div id="ribbon">
+
+		<span class="ribbon-button-alignment"> 
+		    <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="
+			<i class='text-warning fa fa-warning'></i> Внимание! Данная операция сотрет все настройки программы и данные сохраненые в корзине." data-html="true" data-reset-msg="Стереть все данные хранящиеся в локальном хранилище ?">
+			<i class="fa fa-refresh"></i>
+		    </span> 
+		</span>
+
+		<!-- breadcrumb -->
+		<ol class="breadcrumb">
+		    <!-- This is auto generated -->
+		</ol>
+		<!-- end breadcrumb -->
+
+		<!-- You can also add more buttons to the
+		ribbon for further usability
+
+		Example below:
+
+		<span class="ribbon-button-alignment pull-right" style="margin-right:25px">
+		    <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i> Change Grid</span>
+		    <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i> Add</span>
+		    <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i> <span class="hidden-mobile">Search</span></span>
+		</span> -->
+
+	    </div>
+	    <!-- END RIBBON -->
+	    <!-- MODAL WIDGET-->
+	    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel"  aria-hidden="true">
+		<div class="modal-dialog">
+		    <div class="modal-content"></div>
+		</div>
+	    </div>
+	    <!--END MODEL WIDGET-->
+
+<% end %>
+
+<% template page_main() %>MAIN TEMPLATE<% end %>
+
+<% template page_footer() %>
+
+	<!-- #PAGE FOOTER -->
+	    <div class="row">
+		<div class="col-xs-12 col-sm-6">
+		    <span class="txt-color-white">Smart Агент FIT© 1998-2015</span>
+		</div>
+
+		<div class="col-xs-6 col-sm-6 text-right hidden-xs">
+		    <div class="txt-color-white inline-block">
+			<i class="txt-color-blueLight hidden-mobile">Поредыдущий вход был выполнен <i class="fa fa-clock-o"></i> <strong>52 миеуты назат &nbsp;</strong> </i>
+			<div class="btn-group dropup">
+			    <button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
+				<i class="fa fa-link"></i> <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu pull-right text-left">
+				<li>
+				    <div class="padding-5">
+					<p class="txt-color-darken font-sm no-margin">Загрузка данных</p>
+					<div class="progress progress-micro no-margin">
+					    <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
+					</div>
+				    </div>
+				</li>
+				<li class="divider"></li>
+				<li>
+				    <div class="padding-5">
+					<p class="txt-color-darken font-sm no-margin">Загрузка сервера</p>
+					<div class="progress progress-micro no-margin">
+					    <div class="progress-bar progress-bar-success" style="width: 20%;"></div>
+					</div>
+				    </div>
+				</li>
+				<li class="divider"></li>
+				<li >
+				    <div class="padding-5">
+					<p class="txt-color-darken font-sm no-margin">Загрузка памяти <span class="text-danger">*critical*</span></p>
+					<div class="progress progress-micro no-margin">
+					    <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
+					</div>
+				    </div>
+				</li>
+				<li class="divider"></li>
+				<li>
+				    <div class="padding-5">
+					<button class="btn btn-block btn-default">refresh</button>
+				    </div>
+				</li>
+			    </ul>
+			</div>
+			<!-- end btn-group-->
+		    </div>
+		    <!-- end div-->
+		</div>
+		<!-- end col -->
+	    </div>
+	    <!-- end row -->
+	<!-- END FOOTER -->
+
+<% end %>
+
+
+
+<% template render() %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <% include main_header()  %>
+</head>
+<body class="fixed-header fixed-page-footer">
+
+    <header id="header">
+	<% include page_header() %>
+    </header>
+    
+    <aside id="left-panel">
+	<% if page.is_signed %>
+	<% include user_info() %>
+	<% end %>
+	<nav>
+	    <% include nav()  %>
+	</nav>
+    </aside>
+    <div id="main" role="main">
+	<% include ribbon() %>
+	<!-- MAIN CONENT -->
+	<div id="content">
+	
+	</div>
+	<!-- END MAIN CONENT -->
+    </div>
+    <div class="page-footer">
+	<% include page_footer() %>
+    </div>
+    <div id="shortcut">
+        <% include short_cat()%>
+    </div>
+    <% include scripts() %>
+    
+</body>
+</html>
+<% end template %>
+<% end view %>
+<% end skin %>

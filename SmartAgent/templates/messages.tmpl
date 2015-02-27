@@ -1,0 +1,406 @@
+<% c++ #include "data/tmpl_messages.h" %>
+<% skin defskin %>
+<% view Messages uses Data::Messages  %>
+
+<% template header() %>
+<div class="inbox-nav-bar no-content-padding">
+	
+	<h1 class="page-title txt-color-blueDark hidden-tablet"><i class="fa fa-fw fa-inbox"></i> Сообщения &nbsp;
+	    <!--
+		<span class="btn-group">
+			<a href="#" data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><span class="caret single"></span></a>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="#">Action</a>
+				</li>
+				<li>
+					<a href="#">Another action</a>
+				</li>
+				<li>
+					<a href="#">Something else here</a>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<a href="#">Separated link</a>
+				</li>
+			</ul>
+		</span>
+		-->
+	</h1>
+
+	<div class="btn-group hidden-desktop visible-tablet">
+		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			Inbox <i class="fa fa-caret-down"></i>
+		</button>
+		<ul class="dropdown-menu pull-left">
+			<li role="inbox">
+				<a href="javascript:void(0);" class="inbox-load">Входящие <i class="fa fa-check"></i></a>
+			</li>
+			<li role="sending">
+				<a href="javascript:void(0);" class="sending-load">Отправленные</a>
+			</li>
+			<li role="removed">
+				<a href="javascript:void(0);" class="removed-load">Удаленые</a>
+			</li>
+		</ul>
+
+	</div>
+
+	<div class="inbox-checkbox-triggered">
+
+		<div class="btn-group">
+			<a href="javascript:void(0);" rel="tooltip" title="" data-placement="bottom" data-original-title="Выьрать все" class="btn btn-default" role="selectall"><strong><i class="fa fa-check-square-o fa-lg"></i></strong></a>
+			<a href="javascript:void(0);" rel="tooltip" title="" data-placement="bottom" data-original-title="Отметить как прочитанные" class="btn btn-default" role="checked"><strong><i class="fa fa-check fa-lg text-success"></i></strong></a>
+			<a href="javascript:void(0);" rel="tooltip" title="" data-placement="bottom" data-original-title="Отметить как важное" class="btn btn-default hide" role="impotent" ><strong>     <i class="fa fa-exclamation fa-lg text-danger"></i></strong></a>
+			<a href="javascript:void(0);" rel="tooltip" title="" data-placement="bottom" data-original-title="Переместить в папку" class="btn btn-default hide" role="moveto"><strong>     <i class="fa fa-folder-open fa-lg"></i></strong></a>
+			<a href="javascript:void(0);" rel="tooltip" title="" data-placement="bottom" data-original-title="Удалить" class="deletebutton btn btn-default" role="remove"><strong>    <i class="fa fa-trash-o fa-lg"></i></strong></a>
+		</div>
+
+	</div>
+
+	<a href="javascript:void(0);" id="compose-mail-mini" class="btn btn-primary pull-right hidden-desktop visible-tablet"> <strong><i class="fa fa-file fa-lg"></i></strong> </a>
+
+	<div class="btn-group pull-right inbox-paging">
+		<a id="pageLeft" href="javascript:void(0);" class="btn btn-default btn-sm"><strong><i class="fa fa-chevron-left"></i></strong></a>
+		<a id="pageRight" href="javascript:void(0);" class="btn btn-default btn-sm"><strong><i class="fa fa-chevron-right"></i></strong></a>
+	</div>
+	<span id="pagerange" class="pull-right"><strong>1-30</strong> из <strong><%= allMsgCount %></strong></span>
+
+</div>
+
+<div id="inbox-content" class="inbox-body no-content-padding">
+
+	<div class="inbox-side-bar">
+
+		<a href="javascript:void(0);" id="compose-mail" class="btn btn-primary btn-block"> <strong>Написать новое</strong> </a>
+
+		<h6> Папки <a id="updatefolder" href="javascript:void(0);" rel="tooltip" title="" data-placement="right" data-original-title="Обновить" class="pull-right txt-color-darken"><i class="fa fa-refresh"></i></a></h6>
+
+		<ul class="inbox-menu-lg">
+			<li role="inbox" class="active">
+				<a class="inbox-load" href="javascript:void(0);"> Входящие (<%= newMsgCount %>) </a>
+			</li>
+			<li role="sending">
+				<a class="sending-load" href="javascript:void(0);">Отправленные</a>
+			</li>
+			<li role="draft">
+				<a class="draft-load"href="javascript:void(0);">Черновики</a>
+			</li>
+			<li role="removed">
+				<a class="removed-load"href="javascript:void(0);">Удаленые</a>
+			</li>
+		</ul>
+		<% if (0)%>
+		<h6> Быстрый доступ <a href="javascript:void(0);" rel="tooltip" title="" data-placement="right" data-original-title="Добваить иную" class="pull-right txt-color-darken"><i class="fa fa-plus"></i></a></h6>
+
+		<ul class="inbox-menu-sm">
+			<li>
+				<a href="javascript:void(0);">Изображения (476)</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);">Документыs (4)</a>
+			</li>
+		</ul>
+
+		<div class="air air-bottom inbox-space">
+
+			3.5GB из <strong>10GB</strong><a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Очистить корзину" class="pull-right txt-color-darken"><i class="fa fa-trash-o fa-lg"></i></a>
+
+			<div class="progress progress-micro">
+				<div class="progress-bar progress-primary" style="width: 34%;"></div>
+			</div>
+		</div>
+		<% end %>
+
+	</div>
+
+	<div class="table-wrap custom-scroll animated fast fadeInRight">
+		<!-- ajax will fill this area -->
+		ЗАГРУЗКА...
+
+	</div>
+
+
+</div>
+
+<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	var SetCheckedState = undefined;
+	pageSetUp();
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+	
+	var pagefunction = function() {
+
+		// fix table height
+		tableHeightSize();
+		
+		var configure = {
+		    currentPage : 1,
+		    itemPerPage : 30,
+		    maxMessages : <%= allMsgCount %>,
+		    folder:'inbox',
+		    rows:[],
+		    rowcount:0,
+		    mode:'read',
+		};
+		
+		$(window).resize(function() {
+			tableHeightSize()
+		})
+
+		SetCheckedState =  function(mode)
+		{
+		    var btn = $(".fa-check-square-o").parent().parent();
+		    console.log(btn);
+		    if(mode)
+		    {
+			$(btn).addClass('hide');
+		    }else{
+			$(btn).removeClass('hide');
+		    }
+		}
+
+
+		function tableHeightSize() {
+
+			if ($('body').hasClass('menu-on-top')) {
+				var menuHeight = 68;
+				// nav height
+
+				var tableHeight = ($(window).height() - 224) - menuHeight;
+				if (tableHeight < (320 - menuHeight)) {
+					$('.table-wrap').css('height', (320 - menuHeight) + 'px');
+				} else {
+					$('.table-wrap').css('height', tableHeight + 'px');
+				}
+
+			} else {
+				var tableHeight = $(window).height() - 224;
+				if (tableHeight < 320) {
+					$('.table-wrap').css('height', 320 + 'px');
+				} else {
+					$('.table-wrap').css('height', tableHeight + 'px');
+				}
+
+			}
+
+		}
+		
+		// Paginator
+		$("#pageLeft").click(function() {
+		    //console.log(configure.currentPage);
+		    if (configure.currentPage > 1){
+			configure.currentPage -= 1;
+			var beginPos = (configure.currentPage-1)*configure.itemPerPage+1;
+			var endPos = (configure.currentPage-1)*configure.itemPerPage+configure.itemPerPage;
+			$("#pagerange > strong").get(0).innerHTML = beginPos+'-'+endPos;
+			loadURL("messages/list?folder="+configure.folder+"&page="+configure.currentPage+"&items="+configure.itemPerPage, $('#inbox-content > .table-wrap'));
+		    }
+		});
+
+		$("#pageRight").click(function() {
+		    if(configure.currentPage+1 < (configure.maxMessages/configure.itemPerPage)^0)
+		    {
+			var beginPos = configure.currentPage*configure.itemPerPage+1;
+			var endPos = configure.currentPage*configure.itemPerPage+configure.itemPerPage;
+			$("#pagerange > strong").get(0).innerHTML = beginPos+'-'+endPos;
+			configure.currentPage += 1;
+			loadURL("messages/list?folder="+configure.folder+"&page="+configure.currentPage+"&items="+configure.itemPerPage, $('#inbox-content > .table-wrap'));
+		    }
+		});
+
+
+
+
+		/*
+		 * LOAD INBOX MESSAGES
+		 */
+		loadInbox();
+		function loadInbox() {
+			loadURL("messages/list?folder="+configure.folder+"&page=1&items="+configure.itemPerPage, $('#inbox-content > .table-wrap'));
+			configure.currentPage = 1;
+			var beginPos = 1;
+			var endPos = configure.itemPerPage;
+			$("#pagerange > strong").get(0).innerHTML = beginPos+'-'+endPos;
+		}
+	
+		$("#updatefolder").click(function(){
+		    loadInbox();
+		});
+		/*
+		 * Buttons (compose mail and inbox load)
+		 */
+		$(".inbox-menu-lg > li ").click(function() {
+		    console.log($(this).attr("role"));
+		    
+		    if (!$(this).hasClass('active') ) 
+    		    {
+			$('.inbox-menu-lg > li.active').removeClass('active');
+    			$(this).addClass('active');
+    		    }
+		    
+		    
+		    configure.folder=$(this).attr("role");
+		    loadInbox();
+		});
+	
+		// compose email
+		$("#compose-mail").click(function() {
+			loadURL("messages/compose", $('#inbox-content > .table-wrap'));
+		});
+		
+		var sendChanges = function( mode){
+		    var i=0;
+		    $("#inbox-table tr").each(function(){
+			var chkbox = $(this).find("td:first").find("input");
+			console.log($(chkbox)[0].checked , $(this).hasClass('unread'));
+			if($(chkbox)[0].checked && $(this).hasClass('unread') && mode == 'checked'){
+			    //console.log($(this).attr('id'),i);
+			    configure.rows[i++] = $(this).attr('id');
+			    configure.rowcount = i;
+			}else if($(chkbox)[0].checked){
+			    configure.rows[i++] = $(this).attr('id');
+			    configure.rowcount = i;
+			
+			}
+		    });
+
+		    $.ajax({
+			type:"POST",
+			data:{
+	    		    mode:mode,
+	    		    msglist:JSON.stringify(configure.rows),
+	    		    msgcount:configure.rowcount,
+			},
+			url:"messages-data",
+			success: function(data){
+			    //console.log(data);
+			    if(data == 'success')
+			    {
+				for(i=0;i<configure.rowcount;i++)
+				{
+				    console.log($('#'+configure.rows[i]),$('#'+configure.rows[i]).hasClass('unread'));
+				    if($('#'+configure.rows[i]).hasClass('unread'))
+				    {
+					$('#'+configure.rows[i]).removeClass('unread');
+				    }
+				}
+				if(mode=='checked')
+				    NewMessageCount(configure.rowcount);
+				configure.rowcount=0;
+				configure.rows = [];
+			    }
+			}
+    		    });
+		};
+		
+		NewMessageCount = function(msgcount){
+    		    var count = $("nav li").closest("li").find(".inbox-badge").first().text();
+    		    count-=msgcount;
+    		    $("nav li").closest("li").find(".inbox-badge").first().text(count);
+    		    console.log($(".inbox-menu-lg>li a.inbox-load").text("Входящие ("+count+")"));
+        
+		}
+
+		
+		
+		$(".btn-group a").click(function(){
+		    //console.log($(this).attr("role"));
+		    //console.log($("#inbox-table tr td.check-box"));
+		    if($(this).attr("role") == 'selectall'){
+			$("#inbox-table tr").each(function(){
+			    var chkbox = $(this).find("td:first").find("input");
+			    //console.log($(chkbox)[0].checked);
+			    if($(chkbox)[0].checked)
+				$(chkbox)[0].checked = false;
+			    else
+				$(chkbox)[0].checked = true;
+				
+			    $(this).toggleClass('highlight');
+			});
+		    } else if($(this).attr("role")!=undefined) {
+			sendChanges($(this).attr("role"));
+		    };
+		    
+		
+		});
+		
+		
+	};
+
+	
+	// end pagefunction
+
+	// destroy generated instances 
+	// pagedestroy is called automatically before loading a new page
+	// only usable in AJAX version!
+
+	/*var pagedestroy = function(){
+		
+		// destroy summernote
+		if (".summernote") {
+			$(".summernote").summernote( 'destroy' );
+		}
+		
+		// clear misc. click events
+		//$(".inbox-load").off();
+
+		//loadInbox = undefined;
+		//tableHeightSize = undefined;
+
+		// debug msg
+		if (debugState){
+			root.console.log("✔ Summernote editor destroyed");
+		} 
+
+	}*/
+
+	// end destroy
+	
+	// load delete row plugin and run pagefunction
+
+	loadScript("media/js/plugin/delete-table-row/delete-table-row.min.js", pagefunction);
+	
+</script>
+
+<% end %>
+
+<% template render() %>
+
+    <% include header() %>
+
+<% end template %>
+<% end view %>
+<% end skin %>
