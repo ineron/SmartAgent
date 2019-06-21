@@ -2,8 +2,8 @@
 //  BaseApp.h
 //  SmartAgent
 //
-//  Created by Евгений Илюшин on 22.12.14.
-//  Copyright (c) 2014 Евгений Илюшин. All rights reserved.
+//  Created by Евгений Илюшин on 22.12.10.
+//  Copyright (c) 2010 Евгений Илюшин. All rights reserved.
 //
 
 #ifndef __BaseApp__
